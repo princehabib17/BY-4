@@ -40,7 +40,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
         className="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity" 
         onClick={onClose}
       />
-      <div className={`relative bg-ink border-2 border-border w-full ${step === 'calendly' ? 'max-w-4xl' : 'max-w-lg'} p-6 md:p-8 shadow-2xl animate-[fadeIn_0.2s_ease-out]`}>
+      <div className={`relative bg-ink w-full ${step === 'calendly' ? 'max-w-4xl' : 'max-w-lg'} p-6 md:p-8 animate-[fadeIn_0.2s_ease-out]`} style={{ boxShadow: '0 20px 60px rgba(0, 0, 0, 0.8), 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 2px rgba(229, 9, 20, 0.3)' }}>
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-muted hover:text-accent transition-colors z-10"
@@ -58,12 +58,12 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
             <div className="space-y-4">
               <button
                 onClick={() => setStep('calendly')}
-                className="w-full bg-accent hover:bg-accentHover text-white p-6 transition-all duration-300 flex items-center justify-between group border-2 border-accent hover:border-accentHover"
+                className="w-full bg-accent hover:bg-accentHover text-white p-6 transition-all duration-300 flex items-center justify-between group shadow-elevated hover:shadow-accent-glow-strong"
               >
                 <div className="flex items-center gap-4">
                   <Calendar className="w-8 h-8" />
                   <div className="text-left">
-                    <div className="font-bold text-lg uppercase font-display">Book a Call</div>
+                    <div className="font-bold text-lg uppercase font-display tracking-wider">Book a Call</div>
                     <div className="text-sm text-white/80">Schedule a consultation instantly</div>
                   </div>
                 </div>
@@ -72,12 +72,12 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
 
               <button
                 onClick={() => setStep('form')}
-                className="w-full bg-ink2 hover:bg-bg text-white p-6 transition-all duration-300 flex items-center justify-between group border-2 border-border hover:border-accent"
+                className="w-full bg-ink2 hover:bg-bg text-white p-6 transition-all duration-300 flex items-center justify-between group shadow-subtle hover:shadow-accent-glow"
               >
                 <div className="flex items-center gap-4">
                   <CheckCircle className="w-8 h-8 text-muted group-hover:text-accent transition-colors" />
                   <div className="text-left">
-                    <div className="font-bold text-lg uppercase font-display">Submit Application</div>
+                    <div className="font-bold text-lg uppercase font-display tracking-wider">Submit Application</div>
                     <div className="text-sm text-muted">Fill out a quick form</div>
                   </div>
                 </div>
@@ -129,27 +129,27 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-xs font-mono uppercase tracking-widest text-muted mb-2">Name</label>
-                <input 
+                <input
                   required
-                  type="text" 
-                  className="w-full bg-bg border border-border px-4 py-3 text-text focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all"
+                  type="text"
+                  className="w-full bg-bg px-4 py-3 text-text outline-none transition-all shadow-inner-subtle focus:shadow-accent-glow"
                   placeholder="Your full name"
                 />
               </div>
-              
+
               <div>
                 <label className="block text-xs font-mono uppercase tracking-widest text-muted mb-2">Email</label>
-                <input 
+                <input
                   required
-                  type="email" 
-                  className="w-full bg-bg border border-border px-4 py-3 text-text focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all"
+                  type="email"
+                  className="w-full bg-bg px-4 py-3 text-text outline-none transition-all shadow-inner-subtle focus:shadow-accent-glow"
                   placeholder="name@example.com"
                 />
               </div>
 
               <div>
                 <label className="block text-xs font-mono uppercase tracking-widest text-muted mb-2">Main Struggle</label>
-                <select className="w-full bg-bg border border-border px-4 py-3 text-text focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all appearance-none">
+                <select className="w-full bg-bg px-4 py-3 text-text outline-none transition-all appearance-none shadow-inner-subtle focus:shadow-accent-glow">
                   <option>Low Energy / Fog</option>
                   <option>Belly Fat</option>
                   <option>Inconsistent Salah & Gym</option>

@@ -132,7 +132,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
              <div className="container mx-auto max-w-7xl grid grid-cols-2 gap-16 px-8">
                 {/* Sticky Left Side (Images) */}
                 <div className="sticky top-24 h-[calc(100vh-6rem)] w-full py-12">
-                   <div className="relative w-full h-full rounded-sm overflow-hidden border-2 border-border bg-ink shadow-2xl">
+                   <div className="relative w-full h-full rounded-sm overflow-hidden bg-ink shadow-deep">
                       {CHAPTERS.map((chapter, index) => (
                          <div 
                            key={chapter.id}
@@ -151,7 +151,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
                             <div className={`absolute inset-0 bg-gradient-to-t ${chapter.color} opacity-90`} />
                             
                             {/* Floating Badge */}
-                            <div className="absolute top-8 left-8 bg-black/80 backdrop-blur border border-white/10 px-4 py-3 flex items-center gap-3 shadow-xl">
+                            <div className="absolute top-8 left-8 bg-black/80 backdrop-blur px-4 py-3 flex items-center gap-3 shadow-elevated">
                                <chapter.icon className="w-5 h-5 text-accent" />
                                <span className="font-mono text-xs uppercase tracking-widest text-white">{chapter.subtitle}</span>
                             </div>
@@ -215,7 +215,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
 
                    {/* Content */}
                    <div className="relative z-10 w-full p-6 pb-32 flex flex-col items-start">
-                      <div className="bg-accent text-white text-xs font-bold px-3 py-1 mb-4 flex items-center gap-2 uppercase tracking-widest shadow-[0_0_15px_rgba(229,9,20,0.5)]">
+                      <div className="bg-accent text-white text-xs font-bold px-3 py-1 mb-4 flex items-center gap-2 uppercase tracking-widest shadow-accent-glow-strong">
                          <chapter.icon className="w-3 h-3" />
                          <span>Chapter 0{chapter.id}</span>
                       </div>
@@ -243,8 +243,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
           {PILLARS.map((pillar, idx) => {
             const Icon = pillar.icon === 'Activity' ? Activity : pillar.icon === 'Target' ? Target : Clock;
             return (
-              <div key={idx} className="bg-ink p-8 border border-border hover:border-accent transition-colors group">
-                <Icon className="w-12 h-12 text-accent mb-6 group-hover:scale-110 transition-transform" />
+              <div key={idx} className="bg-ink p-8 shadow-elevated hover:shadow-accent-glow transition-all duration-300 group">
+                <Icon className="w-12 h-12 text-accent mb-6 group-hover:scale-110 transition-transform drop-shadow-lg" />
                 <H3>{pillar.title}</H3>
                 <p className="text-muted leading-relaxed">{pillar.desc}</p>
               </div>
@@ -275,13 +275,13 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
 
              {/* Before Image */}
              <div className="relative mb-10 group max-w-2xl">
-                <div className="absolute top-4 left-4 z-10 bg-black/70 backdrop-blur-md px-3 py-1 text-xs font-bold uppercase text-white border border-white/10">
+                <div className="absolute top-4 left-4 z-10 bg-black/70 backdrop-blur-md px-3 py-1 text-xs font-bold uppercase text-white shadow-elevated">
                   Day 1
                 </div>
-                <img 
-                  src={CASE_STUDY.beforeImg} 
-                  alt="Case Study Before" 
-                  className="w-full aspect-[4/5] md:aspect-video object-cover grayscale brightness-90 border border-border transition-all duration-700 hover:brightness-100"
+                <img
+                  src={CASE_STUDY.beforeImg}
+                  alt="Case Study Before"
+                  className="w-full aspect-[4/5] md:aspect-video object-cover grayscale brightness-90 shadow-elevated transition-all duration-700 hover:brightness-100 hover:shadow-deep"
                 />
              </div>
 
@@ -308,18 +308,18 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
 
              {/* After Image */}
              <div className="relative mb-10 max-w-2xl">
-                <div className="absolute top-4 left-4 z-10 bg-accent px-3 py-1 text-xs font-bold uppercase text-white shadow-[0_0_15px_rgba(229,9,20,0.5)]">
+                <div className="absolute top-4 left-4 z-10 bg-accent px-3 py-1 text-xs font-bold uppercase text-white shadow-accent-glow-strong">
                   Week 12
                 </div>
-                <img 
-                  src={CASE_STUDY.afterImg} 
-                  alt="Case Study After" 
-                  className="w-full aspect-[4/5] md:aspect-video object-cover saturate-110 border-2 border-accent/20 shadow-[0_0_40px_rgba(229,9,20,0.15)]"
+                <img
+                  src={CASE_STUDY.afterImg}
+                  alt="Case Study After"
+                  className="w-full aspect-[4/5] md:aspect-video object-cover saturate-110 shadow-accent-glow"
                 />
              </div>
 
              {/* After Text (Results) */}
-             <div className="bg-gradient-to-r from-accent/5 to-transparent p-6 md:p-8 border-l-4 border-accent max-w-2xl">
+             <div className="bg-gradient-to-r from-accent/5 to-transparent p-6 md:p-8 shadow-inner-subtle max-w-2xl" style={{ borderLeft: '4px solid #E50914', boxShadow: 'inset 0 2px 8px rgba(0,0,0,0.3), -4px 0 20px rgba(229, 9, 20, 0.2)' }}>
                 <ul className="space-y-6">
                   {CASE_STUDY.afterPoints.map((point, i) => (
                     <li key={i} className="flex items-start gap-4 text-white text-xl font-medium leading-relaxed">
@@ -349,25 +349,25 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
 
         <div className="grid md:grid-cols-2 gap-6">
           {TRANSFORMATIONS.map((t) => (
-            <div key={t.id} className="group relative bg-bg border border-border overflow-hidden">
+            <div key={t.id} className="group relative bg-bg shadow-elevated hover:shadow-accent-glow overflow-hidden transition-all duration-300">
               <div className="grid grid-cols-2 h-64">
                 <div className="relative">
-                  <span className="absolute top-2 left-2 bg-black/50 text-[10px] uppercase font-bold px-2 py-1 backdrop-blur-sm">Before</span>
+                  <span className="absolute top-2 left-2 bg-black/50 text-[10px] uppercase font-bold px-2 py-1 backdrop-blur-sm shadow-subtle">Before</span>
                   <img src={t.beforeImg} alt="Before" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
                 </div>
                 <div className="relative">
-                  <span className="absolute top-2 left-2 bg-accent text-[10px] uppercase font-bold px-2 py-1">After</span>
+                  <span className="absolute top-2 left-2 bg-accent text-[10px] uppercase font-bold px-2 py-1 shadow-accent-glow">After</span>
                   <img src={t.afterImg} alt="After" className="w-full h-full object-cover" />
                 </div>
               </div>
               <div className="p-6">
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <h4 className="font-display text-xl font-bold uppercase">{t.name}</h4>
+                    <h4 className="font-display text-xl font-bold uppercase tracking-wider">{t.name}</h4>
                     <span className="text-accent text-sm font-bold">{t.result}</span>
                   </div>
                 </div>
-                <p className="text-sm text-muted italic">"{t.quote}"</p>
+                <p className="text-sm text-muted italic leading-relaxed">"{t.quote}"</p>
               </div>
             </div>
           ))}
@@ -379,8 +379,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
 
       {/* PRICING / CTA */}
       <Section id="pricing">
-        <div className="bg-ink border border-border p-8 md:p-16 text-center max-w-4xl mx-auto relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent to-transparent" />
+        <div className="bg-ink shadow-deep p-8 md:p-16 text-center max-w-4xl mx-auto relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent to-transparent shadow-accent-glow" />
           
           <H2>One Program. <Accent>Total Reset.</Accent></H2>
           <p className="text-xl text-muted mb-8 max-w-xl mx-auto">
