@@ -78,3 +78,14 @@ export const PILLARS: ProgramPillar[] = [
     icon: "Clock"
   }
 ];
+
+// Social Media & Booking Configuration
+export const SOCIAL_CONFIG = {
+  instagram: {
+    username: "BrotherYusuf.Fit",
+    embedUrl: "https://www.instagram.com/BrotherYusuf.Fit/embed"
+  },
+  calendly: {
+    url: "https://calendly.com/brotheryusuf-fit/30min"
+  }
+};
