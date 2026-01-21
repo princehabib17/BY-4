@@ -7,8 +7,8 @@ export const InstagramFeed: React.FC = () => {
   useEffect(() => {
     // Load Elfsight Instagram Feed widget script
     const script = document.createElement('script');
-    script.src = 'https://static.elfsight.com/platform/platform.js';
-    script.defer = true;
+    script.src = 'https://elfsightcdn.com/platform.js';
+    script.async = true;
     document.body.appendChild(script);
 
     return () => {
@@ -46,18 +46,9 @@ export const InstagramFeed: React.FC = () => {
         <div className="max-w-6xl mx-auto">
           {/* Elfsight Instagram Feed Widget */}
           <div
-            className="elfsight-app-0a9e1b81-3cc3-4d00-862f-f31d72e46a9c"
+            className="elfsight-app-78a0adcf-abf5-4307-bb2a-4049727fba22"
             data-elfsight-app-lazy
           ></div>
-
-          {/* Alternative: If Elfsight doesn't work, show SnapWidget */}
-          {/*
-          <iframe
-            src={`https://snapwidget.com/embed/${SOCIAL_CONFIG.instagram.widgetId}`}
-            className="snapwidget-widget w-full border-0"
-            style={{ border: 'none', overflow: 'hidden', width: '100%', height: '600px' }}
-          ></iframe>
-          */}
         </div>
 
         {/* CTA to Follow */}
