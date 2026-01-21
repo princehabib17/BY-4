@@ -252,85 +252,87 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
         </div>
       </Section>
 
-      {/* FEATURED CASE STUDY */}
+      {/* FEATURED CASE STUDY - REDESIGNED VERTICAL STACK */}
       <Section darker label="Case Study" className="border-t-2 border-accent/10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          
-          {/* Text Content */}
-          <div className="order-2 lg:order-1">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
             <div className="inline-block bg-accent/10 text-accent px-3 py-1 text-xs font-bold uppercase tracking-widest mb-4 border border-accent/20">
               Featured Client
             </div>
-            <H2 className="mb-8">12 Weeks: <br/><Accent>{CASE_STUDY.title}</Accent></H2>
-            
-            <div className="space-y-8">
-              <div>
-                <h4 className="font-display text-xl text-muted uppercase tracking-wider mb-4 flex items-center gap-2">
-                  <span className="w-2 h-2 bg-red-900 rounded-full"></span> 
-                  The Starting Point
-                </h4>
-                <ul className="space-y-3">
-                  {CASE_STUDY.beforePoints.map((point, i) => (
-                    <li key={i} className="flex items-start gap-3 text-muted/80">
-                      <ArrowRight className="w-5 h-5 text-red-900 shrink-0 mt-0.5" />
+            <H2>12 Weeks: <br/><Accent>{CASE_STUDY.title}</Accent></H2>
+          </div>
+
+          {/* Phase 1: The Before */}
+          <div className="mb-20 relative border-l-2 border-border pl-6 md:pl-12 pb-8">
+             {/* Timeline dot */}
+             <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-border"></div>
+             
+             <div className="mb-8">
+               <span className="text-sm font-mono text-muted uppercase tracking-widest block mb-2">Phase 01</span>
+               <h4 className="font-display text-3xl md:text-4xl text-white uppercase">The Starting Point</h4>
+             </div>
+
+             {/* Before Image */}
+             <div className="relative mb-10 group max-w-2xl">
+                <div className="absolute top-4 left-4 z-10 bg-black/70 backdrop-blur-md px-3 py-1 text-xs font-bold uppercase text-white border border-white/10">
+                  Day 1
+                </div>
+                <img 
+                  src={CASE_STUDY.beforeImg} 
+                  alt="Case Study Before" 
+                  className="w-full aspect-[4/5] md:aspect-video object-cover grayscale brightness-90 border border-border transition-all duration-700 hover:brightness-100"
+                />
+             </div>
+
+             {/* Before Text */}
+             <ul className="space-y-6 max-w-2xl">
+                {CASE_STUDY.beforePoints.map((point, i) => (
+                  <li key={i} className="flex items-start gap-4 text-muted/80 text-lg leading-relaxed">
+                    <ArrowRight className="w-5 h-5 text-red-900 shrink-0 mt-1.5" />
+                    <span>{point}</span>
+                  </li>
+                ))}
+             </ul>
+          </div>
+
+          {/* Phase 2: The After */}
+          <div className="relative border-l-2 border-accent pl-6 md:pl-12">
+             {/* Timeline dot */}
+             <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-accent shadow-[0_0_15px_rgba(229,9,20,0.8)] animate-pulse"></div>
+
+             <div className="mb-8">
+               <span className="text-sm font-mono text-accent uppercase tracking-widest block mb-2">Phase 02</span>
+               <h4 className="font-display text-3xl md:text-4xl text-white uppercase">The Transformation</h4>
+             </div>
+
+             {/* After Image */}
+             <div className="relative mb-10 max-w-2xl">
+                <div className="absolute top-4 left-4 z-10 bg-accent px-3 py-1 text-xs font-bold uppercase text-white shadow-[0_0_15px_rgba(229,9,20,0.5)]">
+                  Week 12
+                </div>
+                <img 
+                  src={CASE_STUDY.afterImg} 
+                  alt="Case Study After" 
+                  className="w-full aspect-[4/5] md:aspect-video object-cover saturate-110 border-2 border-accent/20 shadow-[0_0_40px_rgba(229,9,20,0.15)]"
+                />
+             </div>
+
+             {/* After Text (Results) */}
+             <div className="bg-gradient-to-r from-accent/5 to-transparent p-6 md:p-8 border-l-4 border-accent max-w-2xl">
+                <ul className="space-y-6">
+                  {CASE_STUDY.afterPoints.map((point, i) => (
+                    <li key={i} className="flex items-start gap-4 text-white text-xl font-medium leading-relaxed">
+                      <CheckCircle className="w-6 h-6 text-accent shrink-0 mt-1" />
                       <span>{point}</span>
                     </li>
                   ))}
                 </ul>
-              </div>
-
-              <div className="bg-bg/50 p-6 border-l-2 border-accent">
-                <h4 className="font-display text-xl text-white uppercase tracking-wider mb-4 flex items-center gap-2">
-                  <span className="w-2 h-2 bg-accent rounded-full"></span> 
-                  The Result
-                </h4>
-                <ul className="space-y-3">
-                  {CASE_STUDY.afterPoints.map((point, i) => (
-                    <li key={i} className="flex items-start gap-3 text-white">
-                      <CheckCircle className="w-5 h-5 text-accent shrink-0 mt-0.5" />
-                      <span className="font-medium">{point}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            
-            <div className="mt-8">
-              <Button onClick={onApply} withIcon>Apply for Similar Results</Button>
-            </div>
-          </div>
-
-          {/* Image Comparison */}
-          <div className="order-1 lg:order-2 relative">
-             <div className="grid grid-cols-2 gap-4">
-                <div className="relative group">
-                  <div className="absolute top-4 left-4 z-10 bg-black/70 backdrop-blur-md px-3 py-1 text-xs font-bold uppercase text-white border border-white/10">
-                    Day 1
-                  </div>
-                  <img 
-                    src={CASE_STUDY.beforeImg} 
-                    alt="Case Study Before" 
-                    className="w-full h-[350px] md:h-[500px] object-cover grayscale brightness-90 group-hover:grayscale-0 transition-all duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60"></div>
-                </div>
-                <div className="relative group">
-                  <div className="absolute top-4 left-4 z-10 bg-accent px-3 py-1 text-xs font-bold uppercase text-white shadow-[0_0_15px_rgba(229,9,20,0.5)]">
-                    Week 12
-                  </div>
-                  <img 
-                    src={CASE_STUDY.afterImg} 
-                    alt="Case Study After" 
-                    className="w-full h-[350px] md:h-[500px] object-cover saturate-110 group-hover:saturate-100 transition-all duration-700"
-                  />
-                  {/* Glow effect */}
-                  <div className="absolute -inset-1 bg-accent/20 blur-xl -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                </div>
              </div>
-             {/* Decorative element */}
-             <div className="absolute -bottom-6 -right-6 w-24 h-24 border-b-4 border-r-4 border-accent opacity-50 hidden md:block"></div>
-          </div>
 
+             <div className="mt-16">
+               <Button onClick={onApply} size="lg" className="w-full md:w-auto px-12" withIcon>Apply for Similar Results</Button>
+             </div>
+          </div>
         </div>
       </Section>
 
