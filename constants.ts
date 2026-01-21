@@ -78,3 +78,14 @@ export const PILLARS: ProgramPillar[] = [
     icon: "Clock"
   }
 ];
+
+// Social Media & Booking Configuration
+export const SOCIAL_CONFIG = {
+  instagram: {
+    username: "brotheryusuffit", // Replace with actual Instagram handle
+    embedUrl: "https://www.instagram.com/brotheryusuffit/embed" // Replace with actual handle
+  },
+  calendly: {
+    url: "https://calendly.com/your-calendly-link" // Replace with actual Calendly link
+  }
+};
