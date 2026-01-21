@@ -1,18 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Instagram } from 'lucide-react';
 import { H2, Accent } from './Typography';
 import { SOCIAL_CONFIG } from '../constants';
 
 export const InstagramFeed: React.FC = () => {
-  // Instagram posts grid - can be manually curated or use Instagram API
-  const instagramPosts = [
-    { id: 1, image: "https://res.cloudinary.com/dwoaeoio4/image/upload/v1768888771/Brother_Yusuf_triceps_qrmqph.jpg", likes: "234" },
-    { id: 2, image: "https://res.cloudinary.com/dwoaeoio4/image/upload/v1768888771/Prayer_onkyve.jpg", likes: "189" },
-    { id: 3, image: "https://res.cloudinary.com/dwoaeoio4/image/upload/v1768888799/transformation-1-after_fim5h8.jpg", likes: "421" },
-    { id: 4, image: "https://res.cloudinary.com/dwoaeoio4/image/upload/v1768888800/transformation-2-after_nhhimw.jpg", likes: "356" },
-    { id: 5, image: "https://res.cloudinary.com/dwoaeoio4/image/upload/v1768888771/Brother_Yusuf_tricep_2_zvwjez.jpg", likes: "298" },
-    { id: 6, image: "https://res.cloudinary.com/dwoaeoio4/image/upload/v1768888799/casestudy-after_bzecwq.jpg", likes: "512" },
-  ];
+  useEffect(() => {
+    // Load Elfsight Instagram Feed widget script
+    const script = document.createElement('script');
+    script.src = 'https://elfsightcdn.com/platform.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      // Cleanup script on unmount
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
+    };
+  }, []);
 
   return (
     <section className="py-20 md:py-32 bg-bg border-t border-border">
@@ -37,30 +42,13 @@ export const InstagramFeed: React.FC = () => {
           </a>
         </div>
 
-        {/* Instagram Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {instagramPosts.map((post) => (
-            <a
-              key={post.id}
-              href={`https://instagram.com/${SOCIAL_CONFIG.instagram.username}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative aspect-square overflow-hidden bg-ink border border-border hover:border-accent transition-all duration-300"
-            >
-              <img
-                src={post.image}
-                alt={`Instagram post ${post.id}`}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-              {/* Hover Overlay */}
-              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                <div className="flex items-center gap-2 text-white">
-                  <Instagram className="w-6 h-6" />
-                  <span className="font-bold">{post.likes} likes</span>
-                </div>
-              </div>
-            </a>
-          ))}
+        {/* Instagram Feed Widget */}
+        <div className="max-w-6xl mx-auto">
+          {/* Elfsight Instagram Feed Widget */}
+          <div
+            className="elfsight-app-78a0adcf-abf5-4307-bb2a-4049727fba22"
+            data-elfsight-app-lazy
+          ></div>
         </div>
 
         {/* CTA to Follow */}
