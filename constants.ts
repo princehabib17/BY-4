@@ -82,10 +82,10 @@ export const PILLARS: ProgramPillar[] = [
 // Social Media & Booking Configuration
 export const SOCIAL_CONFIG = {
   instagram: {
-    username: "brotheryusuffit", // Replace with actual Instagram handle
-    embedUrl: "https://www.instagram.com/brotheryusuffit/embed" // Replace with actual handle
+    username: "BrotherYusuf.Fit",
+    embedUrl: "https://www.instagram.com/BrotherYusuf.Fit/embed"
   },
   calendly: {
-    url: "https://calendly.com/your-calendly-link" // Replace with actual Calendly link
+    url: "https://calendly.com/brotheryusuf-fit/30min"
   }
 };
