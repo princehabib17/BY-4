@@ -99,17 +99,15 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
               <Button
                 onClick={onApply}
                 size="lg"
-                className="font-mono"
               >
-                APPLY // 01
+                Enter the Barakah Era
               </Button>
               <Button
                 variant="ghost"
                 size="lg"
                 onClick={() => document.getElementById('stories')?.scrollIntoView({ behavior: 'smooth' })}
-                className="font-mono"
               >
-                VIEW PROOF // 02
+                See the Results
               </Button>
             </div>
 
@@ -218,7 +216,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
                    <div className="h-[40vh] flex items-center justify-start pl-8">
                       <div className="space-y-6">
                         <H2>Your Turn.</H2>
-                        <Button onClick={onApply} size="lg" className="font-mono">APPLY // 01</Button>
+                        <Button onClick={onApply} size="lg">Start Your Transformation</Button>
                       </div>
                    </div>
                 </div>
@@ -261,7 +259,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
              <div className="py-20 text-center bg-bg">
                <div className="space-y-6">
                  <H2>Your Turn.</H2>
-                 <Button onClick={onApply} size="lg" className="font-mono">APPLY // 01</Button>
+                 <Button onClick={onApply} size="lg">Start Your Transformation</Button>
                </div>
              </div>
           </div>
@@ -311,7 +309,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
             <span className="bg-ink/80 px-4 py-2 text-xs font-mono uppercase tracking-widest shadow-subtle">Weekly check-ins</span>
             <span className="bg-ink/80 px-4 py-2 text-xs font-mono uppercase tracking-widest shadow-subtle">Clear targets + structure</span>
           </div>
-          <Button onClick={onApply} size="lg" className="font-mono">APPLY // 01</Button>
+          <Button onClick={onApply} size="lg">Apply Now</Button>
         </div>
       </Section>
 
@@ -388,16 +386,15 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
 
           {/* CTAs */}
           <div className="flex flex-wrap gap-4 justify-center">
-            <Button onClick={onApply} size="lg" className="font-mono">
-              APPLY // 01
+            <Button onClick={onApply} size="lg">
+              Apply for Coaching
             </Button>
             <Button
               variant="ghost"
               size="lg"
               onClick={() => document.getElementById('transformations')?.scrollIntoView({ behavior: 'smooth' })}
-              className="font-mono"
             >
-              SEE MORE RESULTS // 03
+              See More Transformations
             </Button>
           </div>
         </div>
@@ -440,12 +437,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
             variant="ghost"
             size="lg"
             onClick={() => document.getElementById('stories')?.scrollIntoView({ behavior: 'smooth' })}
-            className="font-mono"
           >
-            VIEW PROOF // 02
+            Back to Story
           </Button>
-          <Button onClick={onApply} size="lg" className="font-mono">
-            APPLY // 01
+          <Button onClick={onApply} size="lg">
+            Start Your Journey
           </Button>
         </div>
       </Section>
@@ -463,8 +459,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
             Strong body. Clear mind. Disciplined nafs. Consistent salah—by Allah's permission.
           </Lead>
 
-          <Button size="lg" onClick={onApply} className="font-mono text-lg px-16 py-6">
-            APPLY // 01
+          <Button size="lg" onClick={onApply} className="px-16 py-6">
+            Apply for Coaching
           </Button>
         </div>
       </Section>
