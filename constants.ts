@@ -21,18 +21,9 @@ export const IMAGES = {
 export const CASE_STUDY = {
   beforeImg: "https://res.cloudinary.com/dwoaeoio4/image/upload/v1768888799/casestudy-before_rccwv2.jpg",
   afterImg: "https://res.cloudinary.com/dwoaeoio4/image/upload/v1768888799/casestudy-after_bzecwq.jpg",
-  title: "From Fog to Focus",
-  beforePoints: [
-    "Successful on paper but suffering internally.",
-    "No routine to support his health.",
-    "Significant weight gain left him uncomfortable in his own clothes.",
-    "Poor health and constant lethargy quietly eroded his quality of life."
-  ],
-  afterPoints: [
-    "Energy is steady, his body leaner.",
-    "Mental clarity replaced brain fog.",
-    "Approaches challenges with focus and composure."
-  ]
+  title: "From successful on paper to aligned in body, mind, and discipline.",
+  beforeText: "Before, he was successful on paper but suffering internally. He worked relentlessly while neglecting his body—brain fog, low energy, bloating, and digestive issues became normal. With no routine outside work, weight gain left him uncomfortable in his own clothes. Outwardly fine. Internally drained.",
+  afterText: "Twelve weeks later, you see alignment. His energy is steady. His body is leaner and noticeably stronger. Mental clarity replaced brain fog, and stress no longer controls his decisions. He shows up with focus and composure—and even performs better at work by handling more physical tasks himself. Despite a demanding schedule, his discipline is consistent. He moves with greater control and gratitude."
 };
 
 export const TRANSFORMATIONS: Transformation[] = [

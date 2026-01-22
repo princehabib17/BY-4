@@ -13,28 +13,28 @@ interface HomePageProps {
 const CHAPTERS = [
   {
     id: 1,
-    title: "The Abyss",
-    subtitle: "Ex-Addict",
-    text: "I was buried under layers of vice. My body was soft, my mind was clouded, and my soul was starving. I chased temporary highs to escape the permanent low of my reality. I looked in the mirror and saw a stranger.",
+    title: "From Addiction to Discipline",
+    subtitle: "The Starting Point",
+    text: "For nearly a decade, I was addicted to pharmaceutical drugs, which led to more destructive substances. I lived without control over my nafs—chasing pleasure and distraction. No discipline. No purpose. No peace. Outwardly I survived. Internally I was drowning.",
     image: IMAGES.storyAbyss,
     icon: Activity,
     color: "from-gray-900 to-black"
   },
   {
     id: 2,
-    title: "The Awakening",
-    subtitle: "Finding Islam",
-    text: "The dunya broke me so the Deen could build me. I fell into Sujood not out of piety, but out of desperation. In that silence, I found the noise stopped. I realized my body wasn't mine to trash—it was an Amanah to protect.",
-    image: IMAGES.storyAwakening, 
+    title: "Islam Changed Everything",
+    subtitle: "The Turning Point",
+    text: "My turning point came when I found Islam and reverted. Islam didn't just help me quit bad habits—it rebuilt how I thought, lived, and carried myself. It gave me structure, accountability, and a standard to live up to. I went from intoxicated and lost to sober and grateful, with clear purpose.",
+    image: IMAGES.storyAwakening,
     icon: Moon,
     color: "from-emerald-900/40 to-black"
   },
   {
     id: 3,
-    title: "The Vessel",
-    subtitle: "The Weapon",
-    text: "Fitness became my form of gratitude. Every rep became a tasbih. I didn't just build muscle; I built a vessel capable of serving my family, my community, and my Creator. Now, I forge other men in this same fire.",
-    image: IMAGES.storyVessel, 
+    title: "Body as a Tool for Character",
+    subtitle: "The Transformation",
+    text: "My physical transformation reflected a deeper internal change. Training became a way to build discipline, patience, and self-mastery. I learned to lead myself before leading others. If Allah allowed me to change the way I did, then change is possible for any man willing to commit.",
+    image: IMAGES.storyVessel,
     icon: Shield,
     color: "from-accent/20 to-black"
   }
@@ -80,22 +80,43 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
         </div>
 
         <div className="container mx-auto px-4 md:px-8 relative z-20">
-          <div className="max-w-3xl">
-            <Display className="mb-4 drop-shadow-lg">
-              You’re winning on paper but losing your <Accent>body</Accent> and <Accent>energy</Accent>.
+          <div className="max-w-4xl">
+            <Display className="mb-6 drop-shadow-lg">
+              You're winning on paper, yet your <Accent>body</Accent> and <Accent>energy</Accent> no longer reflect the level you operate at.
             </Display>
-            <Lead className="mb-8 text-white/90 font-medium max-w-xl drop-shadow-md">
-              You sit with your family, quietly questioning the example you’re setting for your children.
+
+            <div className="mb-8 space-y-2 text-white/90 text-lg md:text-xl leading-relaxed max-w-2xl drop-shadow-md">
+              <p>Your mind feels foggy. Your energy is inconsistent. Salah feels rushed and unfocused.</p>
+              <p>You sit with your family, but your presence is divided.</p>
+              <p>You're succeeding in your career, but quietly failing your body.</p>
+            </div>
+
+            <Lead className="mb-8 text-muted max-w-3xl leading-[1.8]">
+              Through my <Accent>Barakah Body Framework</Accent>, I help high-performing Muslim professionals lose 20–50 lbs, build real strength, restore energy, and regain mastery over their nafs—so they lead by example with discipline and barakah, inshallah.
             </Lead>
-            
-            <div className="flex flex-wrap gap-4">
-              <Button 
-                onClick={onApply} 
-                size="lg" 
-                className="bg-accent hover:bg-accentHover text-white shadow-lg shadow-accent/20 animate-[pulse_3s_infinite]"
+
+            <div className="flex flex-wrap gap-4 mb-8">
+              <Button
+                onClick={onApply}
+                size="lg"
               >
-                Enter the barakah era
+                Enter the Barakah Era
               </Button>
+              <Button
+                variant="ghost"
+                size="lg"
+                onClick={() => document.getElementById('stories')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                See the Results
+              </Button>
+            </div>
+
+            {/* Trust Chips */}
+            <div className="flex flex-wrap gap-3">
+              <span className="bg-ink/80 backdrop-blur-sm px-4 py-2 text-xs font-mono uppercase tracking-widest shadow-subtle">Lose 20–50 lbs</span>
+              <span className="bg-ink/80 backdrop-blur-sm px-4 py-2 text-xs font-mono uppercase tracking-widest shadow-subtle">Build Real Strength</span>
+              <span className="bg-ink/80 backdrop-blur-sm px-4 py-2 text-xs font-mono uppercase tracking-widest shadow-subtle">Restore Energy</span>
+              <span className="bg-ink/80 backdrop-blur-sm px-4 py-2 text-xs font-mono uppercase tracking-widest shadow-subtle">Master the Nafs</span>
             </div>
           </div>
         </div>
@@ -117,13 +138,15 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
         </div>
       </Section>
 
-      {/* THE ORIGIN / ABOUT SECTION */}
+      {/* ABOUT (JOURNEY) — 3 PHASES */}
       <section id="about" className="relative bg-bg">
           {/* Header */}
           <div className="py-16 md:py-20 text-center border-b border-border/50">
-              <Display>The <Accent>Origin</Accent></Display>
-              <p className="text-muted font-mono uppercase tracking-widest text-xs md:text-sm mt-4">
-                Darkness to Light. Weakness to Strength.
+              <div className="mb-4">
+                <span className="text-xs font-mono uppercase tracking-widest text-muted">ABOUT</span>
+              </div>
+              <p className="text-xl md:text-2xl text-white max-w-2xl mx-auto leading-relaxed">
+                My transformation started inside—then showed on the outside.
               </p>
           </div>
 
@@ -230,127 +253,143 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
           </div>
       </section>
 
-      {/* THE FRAMEWORK */}
-      <Section id="method" label="The Method">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <H2>The <Accent>Barakah</Accent> System</H2>
-          <Lead>
-            We don't just train bodies. We build vessels for worship. This is fitness for the Akhirah-minded man.
+      {/* PROGRAMS — THE BARAKAH BODY FRAMEWORK */}
+      <Section id="method" label="PROGRAMS">
+        <div className="text-center max-w-4xl mx-auto mb-16">
+          <H2>The <Accent>Barakah Body Framework</Accent></H2>
+          <Lead className="mb-12">
+            The Barakah Body Framework is a proven system designed for Muslim men with demanding careers who want results without burning out or wasting time.
           </Lead>
+
+          {/* 3 Pillars */}
+          <div className="grid md:grid-cols-3 gap-8 text-left">
+            <div className="bg-ink p-8 shadow-elevated hover:shadow-accent-glow transition-all duration-300">
+              <div className="mb-4">
+                <Activity className="w-12 h-12 text-accent mb-4" />
+                <H3>Time Efficient Training</H3>
+              </div>
+              <p className="text-muted leading-relaxed">High-impact workouts that fit a busy schedule—without living in the gym.</p>
+            </div>
+
+            <div className="bg-ink p-8 shadow-elevated hover:shadow-accent-glow transition-all duration-300">
+              <div className="mb-4">
+                <Target className="w-12 h-12 text-accent mb-4" />
+                <H3>Fast Meal Prep</H3>
+              </div>
+              <p className="text-muted leading-relaxed">Nutrition made simple so fat loss and strength are sustainable—without living in the kitchen.</p>
+            </div>
+
+            <div className="bg-ink p-8 shadow-elevated hover:shadow-accent-glow transition-all duration-300">
+              <div className="mb-4">
+                <Clock className="w-12 h-12 text-accent mb-4" />
+                <H3>Ihsan Accountability</H3>
+              </div>
+              <p className="text-muted leading-relaxed">Structure and excellence enforced—especially when motivation is low.</p>
+            </div>
+          </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {PILLARS.map((pillar, idx) => {
-            const Icon = pillar.icon === 'Activity' ? Activity : pillar.icon === 'Target' ? Target : Clock;
-            return (
-              <div key={idx} className="bg-ink p-8 shadow-elevated hover:shadow-accent-glow transition-all duration-300 group">
-                <Icon className="w-12 h-12 text-accent mb-6 group-hover:scale-110 transition-transform drop-shadow-lg" />
-                <H3>{pillar.title}</H3>
-                <p className="text-muted leading-relaxed">{pillar.desc}</p>
-              </div>
-            );
-          })}
+        {/* Program Details */}
+        <div className="max-w-6xl mx-auto text-center">
+          <p className="text-muted mb-8">All programs include:</p>
+          <div className="flex flex-wrap gap-3 justify-center mb-12">
+            <span className="bg-ink/80 px-4 py-2 text-xs font-mono uppercase tracking-widest shadow-subtle">Includes all 3 pillars</span>
+            <span className="bg-ink/80 px-4 py-2 text-xs font-mono uppercase tracking-widest shadow-subtle">Weekly check-ins</span>
+            <span className="bg-ink/80 px-4 py-2 text-xs font-mono uppercase tracking-widest shadow-subtle">Clear targets + structure</span>
+          </div>
+          <Button onClick={onApply} size="lg">Apply Now</Button>
         </div>
       </Section>
 
-      {/* FEATURED CASE STUDY - REDESIGNED VERTICAL STACK */}
-      <Section darker label="Case Study" className="border-t-2 border-accent/10">
+      {/* FEATURED CLIENT STORY */}
+      <Section darker label="FEATURED STORY" id="stories">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
-            <div className="inline-block bg-accent/10 text-accent px-3 py-1 text-xs font-bold uppercase tracking-widest mb-4 border border-accent/20">
-              Featured Client
+          <div className="text-center mb-12">
+            <H2 className="mb-6">{CASE_STUDY.title}</H2>
+            <div className="inline-block bg-accent px-6 py-3 shadow-accent-glow-strong">
+              <span className="font-display text-6xl md:text-7xl text-white tracking-wider">12 WEEKS</span>
             </div>
-            <H2>12 Weeks: <br/><Accent>{CASE_STUDY.title}</Accent></H2>
           </div>
 
-          {/* Phase 1: The Before */}
-          <div className="mb-20 relative border-l-2 border-border pl-6 md:pl-12 pb-8">
-             {/* Timeline dot */}
-             <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-border"></div>
-             
-             <div className="mb-8">
-               <span className="text-sm font-mono text-muted uppercase tracking-widest block mb-2">Phase 01</span>
-               <h4 className="font-display text-3xl md:text-4xl text-white uppercase">The Starting Point</h4>
-             </div>
-
-             {/* Before Image */}
-             <div className="relative mb-10 group max-w-2xl">
-                <div className="absolute top-4 left-4 z-10 bg-black/70 backdrop-blur-md px-3 py-1 text-xs font-bold uppercase text-white shadow-elevated">
-                  Day 1
+          {/* Before Section */}
+          <div className="mb-20">
+             <div className="relative mb-10 max-w-3xl mx-auto">
+                <div className="absolute top-4 left-4 z-10 bg-black/80 backdrop-blur-md px-4 py-2 text-xs font-bold uppercase text-white shadow-elevated">
+                  BEFORE
                 </div>
                 <img
                   src={CASE_STUDY.beforeImg}
-                  alt="Case Study Before"
-                  className="w-full aspect-[4/5] md:aspect-video object-cover grayscale brightness-90 shadow-elevated transition-all duration-700 hover:brightness-100 hover:shadow-deep"
+                  alt="Before"
+                  className="w-full aspect-[4/5] md:aspect-video object-cover grayscale brightness-90 shadow-elevated"
                 />
              </div>
 
-             {/* Before Text */}
-             <ul className="space-y-6 max-w-2xl">
-                {CASE_STUDY.beforePoints.map((point, i) => (
-                  <li key={i} className="flex items-start gap-4 text-muted/80 text-lg leading-relaxed">
-                    <ArrowRight className="w-5 h-5 text-red-900 shrink-0 mt-1.5" />
-                    <span>{point}</span>
-                  </li>
-                ))}
-             </ul>
+             <p className="max-w-3xl mx-auto text-muted/90 text-lg md:text-xl leading-[1.9]">
+                {CASE_STUDY.beforeText}
+             </p>
           </div>
 
-          {/* Phase 2: The After */}
-          <div className="relative border-l-2 border-accent pl-6 md:pl-12">
-             {/* Timeline dot */}
-             <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-accent shadow-[0_0_15px_rgba(229,9,20,0.8)] animate-pulse"></div>
-
-             <div className="mb-8">
-               <span className="text-sm font-mono text-accent uppercase tracking-widest block mb-2">Phase 02</span>
-               <h4 className="font-display text-3xl md:text-4xl text-white uppercase">The Transformation</h4>
-             </div>
-
-             {/* After Image */}
-             <div className="relative mb-10 max-w-2xl">
-                <div className="absolute top-4 left-4 z-10 bg-accent px-3 py-1 text-xs font-bold uppercase text-white shadow-accent-glow-strong">
-                  Week 12
+          {/* After Section */}
+          <div className="mb-16">
+             <div className="relative mb-10 max-w-3xl mx-auto">
+                <div className="absolute top-4 left-4 z-10 bg-accent px-4 py-2 text-xs font-bold uppercase text-white shadow-accent-glow-strong">
+                  AFTER
                 </div>
                 <img
                   src={CASE_STUDY.afterImg}
-                  alt="Case Study After"
+                  alt="After"
                   className="w-full aspect-[4/5] md:aspect-video object-cover saturate-110 shadow-accent-glow"
                 />
              </div>
 
-             {/* After Text (Results) */}
-             <div className="bg-gradient-to-r from-accent/5 to-transparent p-6 md:p-8 shadow-inner-subtle max-w-2xl" style={{ borderLeft: '4px solid #E50914', boxShadow: 'inset 0 2px 8px rgba(0,0,0,0.3), -4px 0 20px rgba(229, 9, 20, 0.2)' }}>
-                <ul className="space-y-6">
-                  {CASE_STUDY.afterPoints.map((point, i) => (
-                    <li key={i} className="flex items-start gap-4 text-white text-xl font-medium leading-relaxed">
-                      <CheckCircle className="w-6 h-6 text-accent shrink-0 mt-1" />
-                      <span>{point}</span>
-                    </li>
-                  ))}
-                </ul>
-             </div>
+             <p className="max-w-3xl mx-auto text-white text-lg md:text-xl leading-[1.9] font-medium">
+                {CASE_STUDY.afterText}
+             </p>
+          </div>
 
-             <div className="mt-16">
-               <Button onClick={onApply} size="lg" className="w-full md:w-auto px-12" withIcon>Apply for Similar Results</Button>
-             </div>
+          {/* 3 IMPROVEMENT LINES */}
+          <div className="max-w-3xl mx-auto space-y-4 mb-16">
+            <div className="border-2 border-border p-4 md:p-6 flex items-center justify-between gap-4 shadow-elevated hover:shadow-accent-glow transition-all duration-300">
+              <span className="font-mono text-xs md:text-sm uppercase tracking-widest text-accent font-bold">ENERGY</span>
+              <span className="text-sm md:text-base text-muted flex-1 text-center hidden md:block">steady, consistent, no crashes</span>
+              <span className="font-display text-xl md:text-2xl text-accent uppercase tracking-wider">LOCKED</span>
+            </div>
+
+            <div className="border-2 border-border p-4 md:p-6 flex items-center justify-between gap-4 shadow-elevated hover:shadow-accent-glow transition-all duration-300">
+              <span className="font-mono text-xs md:text-sm uppercase tracking-widest text-accent font-bold">FOCUS</span>
+              <span className="text-sm md:text-base text-muted flex-1 text-center hidden md:block">brain fog replaced with clarity</span>
+              <span className="font-display text-xl md:text-2xl text-accent uppercase tracking-wider">CLEAR</span>
+            </div>
+
+            <div className="border-2 border-border p-4 md:p-6 flex items-center justify-between gap-4 shadow-elevated hover:shadow-accent-glow transition-all duration-300">
+              <span className="font-mono text-xs md:text-sm uppercase tracking-widest text-accent font-bold">DISCIPLINE</span>
+              <span className="text-sm md:text-base text-muted flex-1 text-center hidden md:block">structure held even when life got busy</span>
+              <span className="font-display text-xl md:text-2xl text-accent uppercase tracking-wider">IHSAN</span>
+            </div>
+          </div>
+
+          {/* CTAs */}
+          <div className="flex flex-wrap gap-4 justify-center">
+            <Button onClick={onApply} size="lg">
+              Apply for Coaching
+            </Button>
+            <Button
+              variant="ghost"
+              size="lg"
+              onClick={() => document.getElementById('transformations')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              See More Transformations
+            </Button>
           </div>
         </div>
       </Section>
 
-      {/* TRANSFORMATIONS */}
-      <Section id="stories" label="Evidence">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-          <div>
-            <H2>More <Accent>Results</Accent></H2>
-            <p className="text-muted">Brothers who took the step.</p>
-          </div>
-          <Button variant="outline" onClick={onApply} withIcon>Start Your Story</Button>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-6">
+      {/* TRANSFORMATION MINI GRID */}
+      <Section id="transformations">
+        <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto mb-8">
           {TRANSFORMATIONS.map((t) => (
             <div key={t.id} className="group relative bg-bg shadow-elevated hover:shadow-accent-glow overflow-hidden transition-all duration-300">
-              <div className="grid grid-cols-2 h-64">
+              <div className="grid grid-cols-2 h-64 md:h-80">
                 <div className="relative">
                   <span className="absolute top-2 left-2 bg-black/50 text-[10px] uppercase font-bold px-2 py-1 backdrop-blur-sm shadow-subtle">Before</span>
                   <img src={t.beforeImg} alt="Before" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
@@ -372,36 +411,34 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
             </div>
           ))}
         </div>
+
+        <p className="text-center text-sm text-muted font-mono uppercase tracking-widest mb-8">
+          Real men. Real schedules. Real results.
+        </p>
+
+        <div className="flex flex-wrap gap-4 justify-center">
+          <Button onClick={onApply} size="lg">
+            Start Your Journey
+          </Button>
+        </div>
       </Section>
 
       {/* INSTAGRAM FEED */}
       <InstagramFeed />
 
-      {/* PRICING / CTA */}
-      <Section id="pricing">
-        <div className="bg-ink shadow-deep p-8 md:p-16 text-center max-w-4xl mx-auto relative overflow-hidden">
+      {/* FINAL CTA (END BANNER) */}
+      <Section id="pricing" darker>
+        <div className="bg-ink shadow-deep p-12 md:p-20 text-center max-w-5xl mx-auto relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent to-transparent shadow-accent-glow" />
-          
-          <H2>One Program. <Accent>Total Reset.</Accent></H2>
-          <p className="text-xl text-muted mb-8 max-w-xl mx-auto">
-            This is not a PDF workout. This is high-proximity coaching for men who are ready to change their life.
-          </p>
 
-          <div className="flex flex-col md:flex-row justify-center gap-8 mb-12 text-left max-w-2xl mx-auto">
-             <ul className="space-y-4">
-               <li className="flex items-center gap-3"><CheckCircle className="w-5 h-5 text-accent" /> <span>Custom Nutrition & Training Protocol</span></li>
-               <li className="flex items-center gap-3"><CheckCircle className="w-5 h-5 text-accent" /> <span>Daily Accountability & Form Review</span></li>
-             </ul>
-             <ul className="space-y-4">
-               <li className="flex items-center gap-3"><CheckCircle className="w-5 h-5 text-accent" /> <span>Spiritual Habits Integration</span></li>
-               <li className="flex items-center gap-3"><CheckCircle className="w-5 h-5 text-accent" /> <span>Private Brotherhood Community</span></li>
-             </ul>
-          </div>
+          <H2 className="mb-6">Lead by example—at home, at work, and with your deen.</H2>
+          <Lead className="mb-12 max-w-2xl mx-auto">
+            Strong body. Clear mind. Disciplined nafs. Consistent salah—by Allah's permission.
+          </Lead>
 
-          <Button size="lg" onClick={onApply} className="w-full md:w-auto px-12">
-            Apply For Coaching
+          <Button size="lg" onClick={onApply} className="px-16 py-6">
+            Apply for Coaching
           </Button>
-          <p className="mt-6 text-xs text-muted font-mono uppercase tracking-widest">Limited spots available for {new Date().toLocaleString('default', { month: 'long' })}</p>
         </div>
       </Section>
     </main>
