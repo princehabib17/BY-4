@@ -13,9 +13,9 @@ interface HomePageProps {
 const CHAPTERS = [
   {
     id: 1,
-    title: "From Addiction to Discipline",
+    title: "Addiction to Discipline",
     subtitle: "The Starting Point",
-    text: "For nearly a decade, I was addicted to pharmaceutical drugs, which led to more destructive substances. I lived without control over my nafs—chasing pleasure and distraction. No discipline. No purpose. No peace. Outwardly I survived. Internally I was drowning.",
+    text: "Nearly a decade addicted to drugs. No control over my nafs. Chasing pleasure and distraction. No discipline. No purpose. No peace. Outwardly surviving. Internally drowning.",
     image: IMAGES.storyAbyss,
     icon: Activity,
     color: "from-gray-900 to-black"
@@ -24,16 +24,16 @@ const CHAPTERS = [
     id: 2,
     title: "Islam Changed Everything",
     subtitle: "The Turning Point",
-    text: "My turning point came when I found Islam and reverted. Islam didn't just help me quit bad habits—it rebuilt how I thought, lived, and carried myself. It gave me structure, accountability, and a standard to live up to. I went from intoxicated and lost to sober and grateful, with clear purpose.",
+    text: "Found Islam. Reverted. Islam rebuilt how I thought, lived, carried myself. Structure. Accountability. Purpose. From intoxicated and lost to sober and grateful.",
     image: IMAGES.storyAwakening,
     icon: Moon,
     color: "from-emerald-900/40 to-black"
   },
   {
     id: 3,
-    title: "Body as a Tool for Character",
+    title: "Body as Character",
     subtitle: "The Transformation",
-    text: "My physical transformation reflected a deeper internal change. Training became a way to build discipline, patience, and self-mastery. I learned to lead myself before leading others. If Allah allowed me to change the way I did, then change is possible for any man willing to commit.",
+    text: "Physical change reflected internal change. Training built discipline, patience, self-mastery. Lead yourself before leading others. If Allah allowed me to change, change is possible for any man willing to commit.",
     image: IMAGES.storyVessel,
     icon: Shield,
     color: "from-accent/20 to-black"
@@ -82,17 +82,17 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
         <div className="container mx-auto px-4 md:px-8 relative z-20">
           <div className="max-w-4xl">
             <Display className="mb-6 drop-shadow-lg">
-              You're winning on paper, yet your <Accent>body</Accent> and <Accent>energy</Accent> no longer reflect the level you operate at.
+              Winning on paper. Losing your <Accent>body</Accent> and <Accent>energy</Accent>.
             </Display>
 
             <div className="mb-8 space-y-2 text-white/90 text-lg md:text-xl leading-relaxed max-w-2xl drop-shadow-md">
-              <p>Your mind feels foggy. Your energy is inconsistent. Salah feels rushed and unfocused.</p>
-              <p>You sit with your family, but your presence is divided.</p>
-              <p>You're succeeding in your career, but quietly failing your body.</p>
+              <p>Mind foggy. Energy inconsistent. Salah rushed.</p>
+              <p>Present with family, but divided.</p>
+              <p>Career success. Body failure.</p>
             </div>
 
             <Lead className="mb-8 text-muted max-w-3xl leading-[1.8]">
-              Through my <Accent>Barakah Body Framework</Accent>, I help high-performing Muslim professionals lose 20–50 lbs, build real strength, restore energy, and regain mastery over their nafs—so they lead by example with discipline and barakah, inshallah.
+              Lose 20–50 lbs. Build strength. Restore energy. Master your nafs. Lead by example.
             </Lead>
 
             <div className="flex flex-wrap gap-4 mb-8">
@@ -107,16 +107,16 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
                 size="lg"
                 onClick={() => document.getElementById('stories')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                See the Results
+                See Proof
               </Button>
             </div>
 
             {/* Trust Chips */}
             <div className="flex flex-wrap gap-3">
-              <span className="bg-ink/80 backdrop-blur-sm px-4 py-2 text-xs font-mono uppercase tracking-widest shadow-subtle">Lose 20–50 lbs</span>
-              <span className="bg-ink/80 backdrop-blur-sm px-4 py-2 text-xs font-mono uppercase tracking-widest shadow-subtle">Build Real Strength</span>
-              <span className="bg-ink/80 backdrop-blur-sm px-4 py-2 text-xs font-mono uppercase tracking-widest shadow-subtle">Restore Energy</span>
-              <span className="bg-ink/80 backdrop-blur-sm px-4 py-2 text-xs font-mono uppercase tracking-widest shadow-subtle">Master the Nafs</span>
+              <span className="bg-ink/80 backdrop-blur-sm px-4 py-2 text-xs font-mono uppercase tracking-widest shadow-subtle">20–50 lbs lost</span>
+              <span className="bg-ink/80 backdrop-blur-sm px-4 py-2 text-xs font-mono uppercase tracking-widest shadow-subtle">Real strength</span>
+              <span className="bg-ink/80 backdrop-blur-sm px-4 py-2 text-xs font-mono uppercase tracking-widest shadow-subtle">Steady energy</span>
+              <span className="bg-ink/80 backdrop-blur-sm px-4 py-2 text-xs font-mono uppercase tracking-widest shadow-subtle">Nafs mastery</span>
             </div>
           </div>
         </div>
@@ -146,7 +146,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
                 <span className="text-xs font-mono uppercase tracking-widest text-muted">ABOUT</span>
               </div>
               <p className="text-xl md:text-2xl text-white max-w-2xl mx-auto leading-relaxed">
-                My transformation started inside—then showed on the outside.
+                Inside first. Outside followed.
               </p>
           </div>
 
@@ -258,7 +258,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
         <div className="text-center max-w-4xl mx-auto mb-16">
           <H2>The <Accent>Barakah Body Framework</Accent></H2>
           <Lead className="mb-12">
-            The Barakah Body Framework is a proven system designed for Muslim men with demanding careers who want results without burning out or wasting time.
+            Proven system for busy Muslim men. Results without burnout.
           </Lead>
 
           {/* 3 Pillars */}
@@ -266,9 +266,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
             <div className="bg-ink p-8 shadow-elevated hover:shadow-accent-glow transition-all duration-300">
               <div className="mb-4">
                 <Activity className="w-12 h-12 text-accent mb-4" />
-                <H3>Time Efficient Training</H3>
+                <H3>Time Efficient</H3>
               </div>
-              <p className="text-muted leading-relaxed">High-impact workouts that fit a busy schedule—without living in the gym.</p>
+              <p className="text-muted leading-relaxed">High-impact workouts. No gym living.</p>
             </div>
 
             <div className="bg-ink p-8 shadow-elevated hover:shadow-accent-glow transition-all duration-300">
@@ -276,7 +276,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
                 <Target className="w-12 h-12 text-accent mb-4" />
                 <H3>Fast Meal Prep</H3>
               </div>
-              <p className="text-muted leading-relaxed">Nutrition made simple so fat loss and strength are sustainable—without living in the kitchen.</p>
+              <p className="text-muted leading-relaxed">Simple nutrition. Sustainable fat loss.</p>
             </div>
 
             <div className="bg-ink p-8 shadow-elevated hover:shadow-accent-glow transition-all duration-300">
@@ -284,7 +284,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
                 <Clock className="w-12 h-12 text-accent mb-4" />
                 <H3>Ihsan Accountability</H3>
               </div>
-              <p className="text-muted leading-relaxed">Structure and excellence enforced—especially when motivation is low.</p>
+              <p className="text-muted leading-relaxed">Excellence enforced. Low motivation handled.</p>
             </div>
           </div>
         </div>
@@ -431,9 +431,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
         <div className="bg-ink shadow-deep p-12 md:p-20 text-center max-w-5xl mx-auto relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent to-transparent shadow-accent-glow" />
 
-          <H2 className="mb-6">Lead by example—at home, at work, and with your deen.</H2>
+          <H2 className="mb-6">Lead by example. Home. Work. Deen.</H2>
           <Lead className="mb-12 max-w-2xl mx-auto">
-            Strong body. Clear mind. Disciplined nafs. Consistent salah—by Allah's permission.
+            Strong body. Clear mind. Disciplined nafs. Consistent salah.
           </Lead>
 
           <Button size="lg" onClick={onApply} className="px-16 py-6">
