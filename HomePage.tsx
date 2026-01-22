@@ -70,10 +70,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
       <section className="relative h-screen min-h-[600px] flex items-end pb-12 md:pb-24 overflow-hidden bg-bg">
         {/* Background Image & Gradient */}
         <div className="absolute inset-0 z-0">
-           <img 
-             src={IMAGES.hero} 
-             alt="Brother Yusuf Fit" 
-             className="w-full h-full object-cover object-[50%_35%]" 
+           <img
+             src={IMAGES.hero}
+             alt="Brother Yusuf Fit"
+             className="w-full h-full object-cover object-[50%_35%] brightness-110"
            />
            {/* Gradient reduced: Dark only at the bottom for text, transparent top for face visibility */}
            <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/30 to-transparent z-10" />
@@ -123,17 +123,17 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
       </section>
 
       {/* THE PROBLEM / AGITATION */}
-      <Section darker>
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+      <Section darker className="py-32 md:py-40">
+        <div className="grid md:grid-cols-2 gap-16 md:gap-24 items-center max-w-6xl mx-auto">
           <div>
-            <H2>The <Accent>Fog</Accent> Is Real</H2>
-            <p className="text-xl text-muted mb-6">
+            <H2 className="mb-8">The <Accent>Fog</Accent> Is Real</H2>
+            <p className="text-xl text-muted leading-[1.9]">
               You are successful in your career. You provide for your family. But when you look in the mirror, you don't see a leader. You see potential wasted.
             </p>
           </div>
           <div className="relative">
              <div className="absolute -inset-4 border-2 border-accent/20 z-0" />
-             <img src={IMAGES.coachPortrait} alt="The struggle" className="relative z-10 w-full h-[400px] object-cover grayscale brightness-75 hover:grayscale-0 transition-all duration-500" />
+             <img src={IMAGES.coachPortrait} alt="The struggle" className="relative z-10 w-full h-[400px] object-cover grayscale brightness-90 hover:grayscale-0 hover:brightness-110 transition-all duration-500" />
           </div>
         </div>
       </Section>
@@ -152,7 +152,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
 
           {/* DESKTOP LAYOUT: Sticky Split Screen */}
           <div className="hidden lg:block relative border-b border-border">
-             <div className="container mx-auto max-w-7xl grid grid-cols-2 gap-16 px-8">
+             <div className="container mx-auto max-w-7xl grid grid-cols-2 gap-24 px-8 py-16">
                 {/* Sticky Left Side (Images) */}
                 <div className="sticky top-24 h-[calc(100vh-6rem)] w-full py-12">
                    <div className="relative w-full h-full rounded-sm overflow-hidden bg-ink shadow-deep">
@@ -165,10 +165,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
                            }`}
                          >
                             {/* Image */}
-                            <img 
-                              src={chapter.image} 
-                              alt={chapter.title} 
-                              className={`w-full h-full object-cover transition-all duration-1000 ${index === 0 ? 'grayscale contrast-125' : ''}`} 
+                            <img
+                              src={chapter.image}
+                              alt={chapter.title}
+                              className={`w-full h-full object-cover transition-all duration-1000 ${index === 0 ? 'grayscale contrast-125 brightness-110' : 'brightness-110'}`}
                             />
                             {/* Overlay Gradient */}
                             <div className={`absolute inset-0 bg-gradient-to-t ${chapter.color} opacity-90`} />
@@ -227,10 +227,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
                 <div key={chapter.id} className="relative h-screen sticky top-0 flex items-end border-b-4 border-black">
                    {/* Background Image */}
                    <div className="absolute inset-0 z-0">
-                      <img 
-                        src={chapter.image} 
-                        alt={chapter.title} 
-                        className={`w-full h-full object-cover object-center ${index === 0 ? 'grayscale contrast-125' : ''}`} 
+                      <img
+                        src={chapter.image}
+                        alt={chapter.title}
+                        className={`w-full h-full object-cover object-center ${index === 0 ? 'grayscale contrast-125 brightness-110' : 'brightness-110'}`}
                       />
                       {/* Aggressive Gradient for readability */}
                       <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/80 to-transparent opacity-100" />
@@ -254,15 +254,15 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
       </section>
 
       {/* PROGRAMS — THE BARAKAH BODY FRAMEWORK */}
-      <Section id="method" label="PROGRAMS">
-        <div className="text-center max-w-4xl mx-auto mb-16">
-          <H2>The <Accent>Barakah Body Framework</Accent></H2>
-          <Lead className="mb-12">
+      <Section id="method" label="PROGRAMS" className="py-32 md:py-40">
+        <div className="text-center max-w-5xl mx-auto mb-20">
+          <H2 className="mb-8">The <Accent>Barakah Body Framework</Accent></H2>
+          <Lead className="mb-16">
             Proven system for busy Muslim men. Results without burnout.
           </Lead>
 
           {/* 3 Pillars */}
-          <div className="grid md:grid-cols-3 gap-8 text-left">
+          <div className="grid md:grid-cols-3 gap-10 text-left">
             <div className="bg-ink p-8 shadow-elevated hover:shadow-accent-glow transition-all duration-300">
               <div className="mb-4">
                 <Activity className="w-12 h-12 text-accent mb-4" />
@@ -302,25 +302,25 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
       </Section>
 
       {/* FEATURED CLIENT STORY */}
-      <Section darker label="FEATURED STORY" id="stories">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <H2 className="mb-6">{CASE_STUDY.title}</H2>
+      <Section darker label="FEATURED STORY" id="stories" className="py-32 md:py-40">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-16">
+            <H2 className="mb-8">{CASE_STUDY.title}</H2>
             <div className="inline-block bg-accent px-6 py-3 shadow-accent-glow-strong">
               <span className="font-display text-6xl md:text-7xl text-white tracking-wider">12 WEEKS</span>
             </div>
           </div>
 
           {/* Before Section */}
-          <div className="mb-20">
-             <div className="relative mb-10 max-w-3xl mx-auto">
+          <div className="mb-24">
+             <div className="relative mb-12 max-w-4xl mx-auto">
                 <div className="absolute top-4 left-4 z-10 bg-black/80 backdrop-blur-md px-4 py-2 text-xs font-bold uppercase text-white shadow-elevated">
                   BEFORE
                 </div>
                 <img
                   src={CASE_STUDY.beforeImg}
                   alt="Before"
-                  className="w-full aspect-[4/5] md:aspect-video object-cover grayscale brightness-90 shadow-elevated"
+                  className="w-full aspect-[4/5] md:aspect-video object-cover grayscale brightness-105 shadow-elevated"
                 />
              </div>
 
@@ -330,15 +330,15 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
           </div>
 
           {/* After Section */}
-          <div className="mb-16">
-             <div className="relative mb-10 max-w-3xl mx-auto">
+          <div className="mb-20">
+             <div className="relative mb-12 max-w-4xl mx-auto">
                 <div className="absolute top-4 left-4 z-10 bg-accent px-4 py-2 text-xs font-bold uppercase text-white shadow-accent-glow-strong">
                   AFTER
                 </div>
                 <img
                   src={CASE_STUDY.afterImg}
                   alt="After"
-                  className="w-full aspect-[4/5] md:aspect-video object-cover saturate-110 shadow-accent-glow"
+                  className="w-full aspect-[4/5] md:aspect-video object-cover saturate-110 brightness-110 shadow-accent-glow"
                 />
              </div>
 
@@ -385,18 +385,18 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
       </Section>
 
       {/* TRANSFORMATION MINI GRID */}
-      <Section id="transformations">
-        <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto mb-8">
+      <Section id="transformations" className="py-32 md:py-40">
+        <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto mb-12">
           {TRANSFORMATIONS.map((t) => (
             <div key={t.id} className="group relative bg-bg shadow-elevated hover:shadow-accent-glow overflow-hidden transition-all duration-300">
-              <div className="grid grid-cols-2 h-64 md:h-80">
+              <div className="grid grid-cols-2 h-72 md:h-96">
                 <div className="relative">
                   <span className="absolute top-2 left-2 bg-black/50 text-[10px] uppercase font-bold px-2 py-1 backdrop-blur-sm shadow-subtle">Before</span>
-                  <img src={t.beforeImg} alt="Before" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+                  <img src={t.beforeImg} alt="Before" className="w-full h-full object-cover grayscale brightness-105 group-hover:grayscale-0 group-hover:brightness-110 transition-all duration-500" />
                 </div>
                 <div className="relative">
                   <span className="absolute top-2 left-2 bg-accent text-[10px] uppercase font-bold px-2 py-1 shadow-accent-glow">After</span>
-                  <img src={t.afterImg} alt="After" className="w-full h-full object-cover" />
+                  <img src={t.afterImg} alt="After" className="w-full h-full object-cover brightness-110" />
                 </div>
               </div>
               <div className="p-6">
@@ -427,12 +427,12 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
       <InstagramFeed />
 
       {/* FINAL CTA (END BANNER) */}
-      <Section id="pricing" darker>
-        <div className="bg-ink shadow-deep p-12 md:p-20 text-center max-w-5xl mx-auto relative overflow-hidden">
+      <Section id="pricing" darker className="py-32 md:py-40">
+        <div className="bg-ink shadow-deep p-16 md:p-24 text-center max-w-5xl mx-auto relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent to-transparent shadow-accent-glow" />
 
-          <H2 className="mb-6">Lead by example. Home. Work. Deen.</H2>
-          <Lead className="mb-12 max-w-2xl mx-auto">
+          <H2 className="mb-8">Lead by example. Home. Work. Deen.</H2>
+          <Lead className="mb-16 max-w-2xl mx-auto">
             Strong body. Clear mind. Disciplined nafs. Consistent salah.
           </Lead>
 
