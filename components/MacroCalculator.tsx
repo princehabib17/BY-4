@@ -91,10 +91,6 @@ const MacroCalculator = () => {
 
   return (
     <section className="bg-ink2 py-20 md:py-32 relative overflow-hidden">
-      {/* TEST BANNER - REMOVE AFTER VERIFICATION */}
-      <div className="bg-red-600 text-white text-center py-4 font-bold text-2xl">
-        🔴 CALCULATOR IS HERE - IF YOU SEE THIS, REFRESH WORKED 🔴
-      </div>
       {/* Background Accent */}
       <div className="absolute inset-0 bg-gradient-to-b from-accent/5 to-transparent pointer-events-none" />
 
