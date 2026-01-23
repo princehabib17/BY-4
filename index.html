@@ -83,6 +83,32 @@
       .shadow-accent-glow-strong {
         box-shadow: 0 0 30px rgba(229, 9, 20, 0.5), 0 0 60px rgba(229, 9, 20, 0.2);
       }
+
+      /* Hide Elfsight watermarks and branding */
+      .instagram-feed-wrapper a[href*="elfsight.com"],
+      .instagram-feed-wrapper a[href*="elfsight"],
+      .instagram-feed-wrapper [class*="eapps-link"],
+      .instagram-feed-wrapper [class*="eapps-instagram-feed-title-container"] a[href*="instagram.com"],
+      div[class*="eapps-link"],
+      a[href*="elfsight.com"],
+      .eapps-link,
+      [class*="eapps"][class*="link"],
+      [class*="elfsight-app"] a[href*="elfsight"],
+      .elfsight-app-78a0adcf-abf5-4307-bb2a-4049727fba22 a[href*="elfsight"] {
+        display: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+      }
+
+      /* Hide "Free Instagram Feed Widget" text */
+      .instagram-feed-wrapper a:contains("Free"),
+      .instagram-feed-wrapper a:contains("Widget"),
+      .instagram-feed-wrapper [class*="branding"],
+      [class*="elfsight"][class*="branding"],
+      [class*="eapps"][class*="branding"] {
+        display: none !important;
+      }
     </style>
   <script type="importmap">
 {

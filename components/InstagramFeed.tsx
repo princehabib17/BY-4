@@ -11,6 +11,32 @@ export const InstagramFeed: React.FC = () => {
     script.async = true;
     document.body.appendChild(script);
 
+    // Remove watermarks after widget loads
+    const removeWatermarks = () => {
+      const selectors = [
+        'a[href*="elfsight.com"]',
+        'a[href*="elfsight"]',
+        '[class*="eapps-link"]',
+        '[class*="branding"]',
+        '.eapps-link'
+      ];
+
+      selectors.forEach(selector => {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach(el => {
+          if (el && el.parentNode) {
+            el.parentNode.removeChild(el);
+          }
+        });
+      });
+    };
+
+    // Try to remove watermarks multiple times as the widget loads asynchronously
+    const intervals = [1000, 2000, 3000, 5000];
+    intervals.forEach(delay => {
+      setTimeout(removeWatermarks, delay);
+    });
+
     return () => {
       // Cleanup script on unmount
       if (document.body.contains(script)) {
@@ -43,7 +69,7 @@ export const InstagramFeed: React.FC = () => {
         </div>
 
         {/* Instagram Feed Widget */}
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-6xl mx-auto instagram-feed-wrapper">
           {/* Elfsight Instagram Feed Widget */}
           <div
             className="elfsight-app-78a0adcf-abf5-4307-bb2a-4049727fba22"
