@@ -3,6 +3,7 @@ import { Button } from './components/Button';
 import { Section } from './components/Section';
 import { Display, H2, H3, Lead, Accent } from './components/Typography';
 import { InstagramFeed } from './components/InstagramFeed';
+import MacroCalculator from './components/MacroCalculator';
 import { IMAGES, PILLARS, TRANSFORMATIONS, CASE_STUDY } from './constants';
 import { CheckCircle, Activity, Target, Clock, Star, ArrowRight, Moon, Shield } from 'lucide-react';
 
@@ -312,6 +313,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
           <Button onClick={onApply} size="lg">Apply Now</Button>
         </div>
       </Section>
+
+      {/* MACRO CALCULATOR */}
+      <MacroCalculator />
 
       {/* FEATURED CLIENT STORY */}
       <Section darker label="FEATURED STORY" id="stories" className="py-32 md:py-40">
