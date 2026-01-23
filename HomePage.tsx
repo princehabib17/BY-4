@@ -205,16 +205,18 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
                          <div className="text-accent font-display text-9xl opacity-[0.05] -mb-10 select-none -ml-4">0{chapter.id}</div>
                          <H2 className="relative z-10">{chapter.title}</H2>
                          <div className="w-12 h-1 bg-accent mb-8"></div>
-                         <p className="text-xl md:text-2xl text-muted leading-relaxed font-light">
-                           {chapter.text}
-                         </p>
+                         <div className="text-xl md:text-2xl text-muted leading-[1.9] font-light space-y-4">
+                           {chapter.text.split('\n').map((line, i) => (
+                             <p key={i}>{line}</p>
+                           ))}
+                         </div>
                       </div>
                    ))}
                    
                    <div className="h-[40vh] flex items-center justify-start pl-8">
                       <div className="space-y-6">
                         <H2>Your Turn.</H2>
-                        <Button onClick={onApply} size="lg" withIcon className="animate-pulse">Start Your Chapter 04</Button>
+                        <Button onClick={onApply} size="lg">Start Your Transformation</Button>
                       </div>
                    </div>
                 </div>
@@ -244,12 +246,22 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
                       </div>
                       
                       <H2 className="text-4xl md:text-5xl mb-4 drop-shadow-xl">{chapter.title}</H2>
-                      <p className="text-gray-200 text-lg leading-relaxed drop-shadow-md border-l-2 border-accent pl-4">
-                         {chapter.text}
-                      </p>
+                      <div className="text-gray-200 text-lg leading-[1.8] drop-shadow-md border-l-2 border-accent pl-4 space-y-3">
+                         {chapter.text.split('\n').map((line, i) => (
+                           <p key={i}>{line}</p>
+                         ))}
+                      </div>
                    </div>
                 </div>
              ))}
+
+             {/* CTA after mobile journey */}
+             <div className="py-20 text-center bg-bg">
+               <div className="space-y-6">
+                 <H2>Your Turn.</H2>
+                 <Button onClick={onApply} size="lg">Start Your Transformation</Button>
+               </div>
+             </div>
           </div>
       </section>
 
