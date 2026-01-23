@@ -267,52 +267,174 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
       </section>
 
       {/* PROGRAMS — THE BARAKAH BODY FRAMEWORK */}
-      <Section id="method" label="PROGRAMS" className="py-32 md:py-40">
-        <div className="text-center max-w-5xl mx-auto mb-20">
-          <H2 className="mb-8">The <Accent>Barakah Body Framework</Accent></H2>
-          <Lead className="mb-16">
-            The Barakah Body Framework is a proven system designed for Muslim men with demanding careers who want results without burning out or wasting time.
-          </Lead>
+      <section id="method" className="relative py-32 md:py-40 bg-ink2 overflow-hidden">
+        {/* Background Accents */}
+        <div className="absolute inset-0 bg-gradient-to-b from-accent/10 via-transparent to-accent/5 pointer-events-none" />
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-accent to-transparent shadow-accent-glow" />
 
-          {/* 3 Pillars */}
-          <div className="grid md:grid-cols-3 gap-10 text-left">
-            <div className="bg-ink p-8 shadow-elevated hover:shadow-accent-glow transition-all duration-300">
-              <div className="mb-4">
-                <Activity className="w-12 h-12 text-accent mb-4" />
-                <H3>Time Efficient</H3>
-              </div>
-              <p className="text-muted leading-relaxed">High-impact workouts that fit a busy schedule—without living in the gym.</p>
+        <div className="container mx-auto px-4 md:px-8 relative z-10">
+          {/* Header */}
+          <div className="text-center mb-20 md:mb-24">
+            <div className="mb-6">
+              <span className="text-xs font-mono uppercase tracking-widest text-muted">PROGRAMS</span>
             </div>
+            <H2 className="mb-8 text-5xl md:text-6xl">
+              The <Accent>Barakah Body</Accent> Framework
+            </H2>
+            <Lead className="max-w-3xl mx-auto text-xl leading-[1.9]">
+              A proven system designed for Muslim men with demanding careers who want results without burning out or wasting time.
+            </Lead>
+          </div>
 
-            <div className="bg-ink p-8 shadow-elevated hover:shadow-accent-glow transition-all duration-300">
-              <div className="mb-4">
-                <Target className="w-12 h-12 text-accent mb-4" />
-                <H3>Fast Meal Prep</H3>
-              </div>
-              <p className="text-muted leading-relaxed">Simple nutrition strategies that support sustainable fat loss without complexity.</p>
-            </div>
+          {/* The 3 Pillars - Premium Layout */}
+          <div className="max-w-7xl mx-auto mb-20">
+            <div className="grid md:grid-cols-3 gap-8 md:gap-6">
+              {/* Pillar 01 */}
+              <div className="group relative bg-bg border-2 border-border hover:border-accent shadow-deep hover:shadow-accent-glow transition-all duration-500 overflow-hidden">
+                {/* Number Badge */}
+                <div className="absolute top-0 left-0 w-full h-1 bg-accent shadow-accent-glow" />
+                <div className="absolute -top-6 -right-6 font-display text-[140px] text-accent/5 leading-none select-none">01</div>
 
-            <div className="bg-ink p-8 shadow-elevated hover:shadow-accent-glow transition-all duration-300">
-              <div className="mb-4">
-                <Clock className="w-12 h-12 text-accent mb-4" />
-                <H3>Ihsan Accountability</H3>
+                <div className="relative p-10 md:p-12">
+                  {/* Icon with Glow */}
+                  <div className="mb-8 flex items-center justify-between">
+                    <div className="w-16 h-16 rounded-full bg-accent/10 border-2 border-accent shadow-accent-glow flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                      <Activity className="w-8 h-8 text-accent" />
+                    </div>
+                    <span className="font-display text-6xl text-accent/20 group-hover:text-accent/40 transition-colors duration-500">01</span>
+                  </div>
+
+                  <H3 className="mb-4 text-2xl">Time Efficient Training</H3>
+                  <p className="text-muted leading-[1.8] mb-6">
+                    High-impact workouts that fit a busy schedule—without living in the gym.
+                  </p>
+
+                  {/* Key Metrics */}
+                  <div className="pt-6 border-t border-border/50">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-muted">Training frequency</span>
+                      <span className="font-bold text-accent">3-4x/week</span>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <p className="text-muted leading-relaxed">Excellence is enforced. Low motivation is handled with structure and discipline.</p>
+
+              {/* Pillar 02 */}
+              <div className="group relative bg-bg border-2 border-border hover:border-accent shadow-deep hover:shadow-accent-glow transition-all duration-500 overflow-hidden">
+                {/* Number Badge */}
+                <div className="absolute top-0 left-0 w-full h-1 bg-accent shadow-accent-glow" />
+                <div className="absolute -top-6 -right-6 font-display text-[140px] text-accent/5 leading-none select-none">02</div>
+
+                <div className="relative p-10 md:p-12">
+                  {/* Icon with Glow */}
+                  <div className="mb-8 flex items-center justify-between">
+                    <div className="w-16 h-16 rounded-full bg-accent/10 border-2 border-accent shadow-accent-glow flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                      <Target className="w-8 h-8 text-accent" />
+                    </div>
+                    <span className="font-display text-6xl text-accent/20 group-hover:text-accent/40 transition-colors duration-500">02</span>
+                  </div>
+
+                  <H3 className="mb-4 text-2xl">Fast Meal Prep</H3>
+                  <p className="text-muted leading-[1.8] mb-6">
+                    Simple nutrition strategies that support sustainable fat loss without complexity.
+                  </p>
+
+                  {/* Key Metrics */}
+                  <div className="pt-6 border-t border-border/50">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-muted">Meal prep time</span>
+                      <span className="font-bold text-accent">30 min/day</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Pillar 03 */}
+              <div className="group relative bg-bg border-2 border-border hover:border-accent shadow-deep hover:shadow-accent-glow transition-all duration-500 overflow-hidden">
+                {/* Number Badge */}
+                <div className="absolute top-0 left-0 w-full h-1 bg-accent shadow-accent-glow" />
+                <div className="absolute -top-6 -right-6 font-display text-[140px] text-accent/5 leading-none select-none">03</div>
+
+                <div className="relative p-10 md:p-12">
+                  {/* Icon with Glow */}
+                  <div className="mb-8 flex items-center justify-between">
+                    <div className="w-16 h-16 rounded-full bg-accent/10 border-2 border-accent shadow-accent-glow flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                      <Clock className="w-8 h-8 text-accent" />
+                    </div>
+                    <span className="font-display text-6xl text-accent/20 group-hover:text-accent/40 transition-colors duration-500">03</span>
+                  </div>
+
+                  <H3 className="mb-4 text-2xl">Ihsan Accountability</H3>
+                  <p className="text-muted leading-[1.8] mb-6">
+                    Excellence is enforced. Low motivation is handled with structure and discipline.
+                  </p>
+
+                  {/* Key Metrics */}
+                  <div className="pt-6 border-t border-border/50">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-muted">Check-ins</span>
+                      <span className="font-bold text-accent">Weekly</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Program Details */}
-        <div className="max-w-6xl mx-auto text-center">
-          <p className="text-muted mb-8">All programs include:</p>
-          <div className="flex flex-wrap gap-3 justify-center mb-12">
-            <span className="bg-ink/80 px-4 py-2 text-xs font-mono uppercase tracking-widest shadow-subtle">Includes all 3 pillars</span>
-            <span className="bg-ink/80 px-4 py-2 text-xs font-mono uppercase tracking-widest shadow-subtle">Weekly check-ins</span>
-            <span className="bg-ink/80 px-4 py-2 text-xs font-mono uppercase tracking-widest shadow-subtle">Clear targets + structure</span>
+          {/* Results Banner */}
+          <div className="max-w-5xl mx-auto mb-16">
+            <div className="bg-bg border-2 border-accent/30 shadow-accent-glow p-8 md:p-12">
+              <div className="grid md:grid-cols-3 gap-8 text-center">
+                <div className="border-r border-border/50 last:border-r-0">
+                  <div className="font-display text-5xl md:text-6xl text-accent mb-2">12</div>
+                  <div className="text-sm text-muted uppercase tracking-wider">Week Minimum</div>
+                </div>
+                <div className="border-r border-border/50 last:border-r-0">
+                  <div className="font-display text-5xl md:text-6xl text-accent mb-2">20-50</div>
+                  <div className="text-sm text-muted uppercase tracking-wider">Pounds Lost</div>
+                </div>
+                <div>
+                  <div className="font-display text-5xl md:text-6xl text-accent mb-2">100%</div>
+                  <div className="text-sm text-muted uppercase tracking-wider">Customized</div>
+                </div>
+              </div>
+            </div>
           </div>
-          <Button onClick={onApply} size="lg">Apply Now</Button>
+
+          {/* What's Included */}
+          <div className="max-w-4xl mx-auto text-center mb-12">
+            <h3 className="text-xl font-bold text-white mb-8 uppercase tracking-wider">Every Program Includes</h3>
+            <div className="grid md:grid-cols-2 gap-4 mb-12">
+              <div className="flex items-center gap-4 bg-ink p-5 shadow-subtle">
+                <CheckCircle className="w-6 h-6 text-accent flex-shrink-0" />
+                <span className="text-left text-white">All 3 pillars integrated</span>
+              </div>
+              <div className="flex items-center gap-4 bg-ink p-5 shadow-subtle">
+                <CheckCircle className="w-6 h-6 text-accent flex-shrink-0" />
+                <span className="text-left text-white">Weekly accountability check-ins</span>
+              </div>
+              <div className="flex items-center gap-4 bg-ink p-5 shadow-subtle">
+                <CheckCircle className="w-6 h-6 text-accent flex-shrink-0" />
+                <span className="text-left text-white">Custom macro & training plan</span>
+              </div>
+              <div className="flex items-center gap-4 bg-ink p-5 shadow-subtle">
+                <CheckCircle className="w-6 h-6 text-accent flex-shrink-0" />
+                <span className="text-left text-white">24/7 support & guidance</span>
+              </div>
+            </div>
+          </div>
+
+          {/* CTA */}
+          <div className="text-center">
+            <Button onClick={onApply} size="lg" className="px-16 py-6 text-xl">
+              Apply for Coaching
+            </Button>
+            <p className="mt-6 text-sm text-muted">
+              Limited spots available • Serious applicants only
+            </p>
+          </div>
         </div>
-      </Section>
+      </section>
 
       {/* MACRO CALCULATOR */}
       <MacroCalculator />
