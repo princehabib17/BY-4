@@ -185,9 +185,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
       </Section>
 
       {/* SECTION 4: THE ORIGIN / ABOUT */}
-      <section id="about" className="relative bg-bg pb-32">
-          <div className="py-24 text-center border-b border-border/50 px-4">
-              <H2 className="mb-2 text-3xl md:text-5xl leading-tight">About me: <span className="text-white">I was not always the man you see today</span></H2>
+      <section id="about" className="relative bg-bg pb-16 md:pb-24 lg:pb-32">
+          <div className="py-16 md:py-24 lg:py-32 text-center border-b border-border/50 px-4">
+              <H2>About me: <span className="text-white">I was not always the man you see today</span></H2>
           </div>
 
           <div className="hidden lg:block relative border-b border-border">
@@ -316,7 +316,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
 
                 {/* Content */}
                 <div className="relative z-10 flex-grow">
-                  <H3 className="mb-4 text-xl md:text-2xl group-hover:translate-x-1 transition-transform duration-300">{pillar.title}</H3>
+                  <H3 className="mb-4 group-hover:translate-x-1 transition-transform duration-300">{pillar.title}</H3>
                   <Body className="text-sm md:text-base mb-8 opacity-70 group-hover:opacity-100 transition-opacity">{pillar.desc}</Body>
 
                   {/* Benefits List */}
