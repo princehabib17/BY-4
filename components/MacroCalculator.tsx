@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Flame, Target, Dumbbell, Activity, TrendingDown, Zap } from 'lucide-react';
+import { H2, Body } from './Typography';
 
 interface MacroForm {
   goal: string;
@@ -111,7 +112,7 @@ export const MacroCalculator: React.FC = () => {
   };
 
   return (
-    <section className="w-full min-h-screen bg-gradient-to-br from-black via-ink to-black text-white py-16 px-4 flex items-center justify-center relative overflow-hidden border-t border-border">
+    <section className="w-full min-h-screen bg-gradient-to-br from-black via-ink to-black text-white py-16 md:py-24 lg:py-32 px-4 flex items-center justify-center relative overflow-hidden border-t border-border">
       
       {/* Ambient Background Effects */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-[120px] animate-pulse"/>
@@ -126,10 +127,10 @@ export const MacroCalculator: React.FC = () => {
             <span className="text-sm font-bold text-neutral-400 uppercase tracking-[0.3em]">Precision Nutrition</span>
             <Zap className="w-5 h-5 text-accent" />
           </div>
-          <h1 className="text-6xl md:text-7xl font-display font-black tracking-[-0.03em] mb-3 text-white">
+          <H2 className="mb-3 text-white">
             MACRO CALCULATOR
-          </h1>
-          <p className="text-neutral-400 text-lg font-medium">Advanced macronutrient optimization</p>
+          </H2>
+          <Body className="text-neutral-400 font-medium">Advanced macronutrient optimization</Body>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8">
