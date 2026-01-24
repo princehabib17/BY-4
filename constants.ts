@@ -21,9 +21,18 @@ export const IMAGES = {
 export const CASE_STUDY = {
   beforeImg: "https://res.cloudinary.com/dwoaeoio4/image/upload/v1768888799/casestudy-before_rccwv2.jpg",
   afterImg: "https://res.cloudinary.com/dwoaeoio4/image/upload/v1768888799/casestudy-after_bzecwq.jpg",
-  title: "Paper success to real alignment.",
-  beforeText: "Before, he was successful on paper but suffering internally. He worked relentlessly while neglecting his body—brain fog, low energy, bloating, and digestive issues became normal. With no routine outside work, weight gain left him uncomfortable in his own clothes. Outwardly fine. Internally drained.",
-  afterText: "Twelve weeks later, you see alignment. His energy is steady. His body is leaner and noticeably stronger. Mental clarity replaced brain fog, and stress no longer controls his decisions. He shows up with focus and composure—and even performs better at work by handling more physical tasks himself. Despite a demanding schedule, his discipline is consistent. He moves with greater control and gratitude."
+  title: "From Fog to Focus",
+  beforePoints: [
+    "Successful on paper but suffering internally.",
+    "No routine to support his health.",
+    "Significant weight gain left him uncomfortable in his own clothes.",
+    "Poor health and constant lethargy quietly eroded his quality of life."
+  ],
+  afterPoints: [
+    "Energy is steady, his body leaner.",
+    "Mental clarity replaced brain fog.",
+    "Approaches challenges with focus and composure."
+  ]
 };
 
 export const TRANSFORMATIONS: Transformation[] = [
@@ -54,29 +63,36 @@ export const NAV_ITEMS: NavItem[] = [
 
 export const PILLARS: ProgramPillar[] = [
   {
-    title: "Metabolic Reset",
-    desc: "Strip fat without starving. Nutrition designed for high performance.",
-    icon: "Activity"
+    title: "Time Efficient Training",
+    desc: "Strength and fat loss through high-impact workouts that fit into a busy schedule, without spending hours in the gym.",
+    icon: "Clock",
+    benefits: [
+      "45-Min High-Output Sessions",
+      "3-4 Days Per Week Frequency",
+      "Science-Based Hypertrophy",
+      "Zero 'Junk Volume'"
+    ]
   },
   {
-    title: "Ihsan Accountability",
-    desc: "Daily check-ins. We don't just count reps, we count intentions.",
-    icon: "Target"
+    title: "Fast Meal Prep",
+    desc: "Removes complexity from nutrition, making fat loss and muscle growth sustainable without living in the kitchen or giving up the foods you enjoy.",
+    icon: "Activity",
+    benefits: [
+      "High-Protein Simple Recipes",
+      "No Obsessive Macro Tracking",
+      "Family-Friendly Meals",
+      "Sustainable Energy Levels"
+    ]
   },
   {
-    title: "Barakah Scheduling",
-    desc: "Workouts built around your Salah, not against it.",
-    icon: "Clock"
+    title: "Taqwa Accountability",
+    desc: "Creates consistency by enforcing structure and excellence, especially when motivation is low.",
+    icon: "Target",
+    benefits: [
+      "Daily Fajr Check-ins",
+      "Private Brotherhood Group",
+      "Weekly Form Reviews",
+      "Spiritual & Physical Alignment"
+    ]
   }
 ];
-
-// Social Media & Booking Configuration
-export const SOCIAL_CONFIG = {
-  instagram: {
-    username: "BrotherYusuf.Fit",
-    embedUrl: "https://www.instagram.com/BrotherYusuf.Fit/embed"
-  },
-  calendly: {
-    url: "https://calendly.com/brotheryusuf-fit/30min"
-  }
-};

@@ -39,16 +39,10 @@
         background-color: #0A0A0A;
         color: #F3F3F3;
         font-family: 'Inter', sans-serif;
-        line-height: 1.7;
-        letter-spacing: 0.01em;
       }
       .font-display { font-family: 'Oswald', sans-serif; }
       .font-mono { font-family: 'JetBrains Mono', monospace; }
-
-      p {
-        line-height: 1.8;
-      }
-
+      
       /* Custom Scrollbar */
       ::-webkit-scrollbar { width: 8px; }
       ::-webkit-scrollbar-track { background: #0A0A0A; }
@@ -57,57 +51,6 @@
 
       .accent-glow {
         box-shadow: 0 0 20px rgba(229, 9, 20, 0.3);
-      }
-
-      /* Enhanced shadow utilities */
-      .shadow-subtle {
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2);
-      }
-
-      .shadow-elevated {
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3);
-      }
-
-      .shadow-deep {
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 4px 16px rgba(0, 0, 0, 0.4);
-      }
-
-      .shadow-inner-subtle {
-        box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
-      }
-
-      .shadow-accent-glow {
-        box-shadow: 0 0 20px rgba(229, 9, 20, 0.3), 0 0 40px rgba(229, 9, 20, 0.1);
-      }
-
-      .shadow-accent-glow-strong {
-        box-shadow: 0 0 30px rgba(229, 9, 20, 0.5), 0 0 60px rgba(229, 9, 20, 0.2);
-      }
-
-      /* Hide Elfsight watermarks and branding */
-      .instagram-feed-wrapper a[href*="elfsight.com"],
-      .instagram-feed-wrapper a[href*="elfsight"],
-      .instagram-feed-wrapper [class*="eapps-link"],
-      .instagram-feed-wrapper [class*="eapps-instagram-feed-title-container"] a[href*="instagram.com"],
-      div[class*="eapps-link"],
-      a[href*="elfsight.com"],
-      .eapps-link,
-      [class*="eapps"][class*="link"],
-      [class*="elfsight-app"] a[href*="elfsight"],
-      .elfsight-app-78a0adcf-abf5-4307-bb2a-4049727fba22 a[href*="elfsight"] {
-        display: none !important;
-        opacity: 0 !important;
-        visibility: hidden !important;
-        pointer-events: none !important;
-      }
-
-      /* Hide "Free Instagram Feed Widget" text */
-      .instagram-feed-wrapper a:contains("Free"),
-      .instagram-feed-wrapper a:contains("Widget"),
-      .instagram-feed-wrapper [class*="branding"],
-      [class*="elfsight"][class*="branding"],
-      [class*="eapps"][class*="branding"] {
-        display: none !important;
       }
     </style>
   <script type="importmap">
@@ -124,6 +67,5 @@
 </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
   </body>
 </html>

@@ -16,6 +16,7 @@ export interface ProgramPillar {
   title: string;
   desc: string;
   icon: string;
+  benefits: string[];
 }
 
 export interface PricingPlan {

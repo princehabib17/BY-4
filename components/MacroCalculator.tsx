@@ -1,171 +1,215 @@
 import React, { useState } from 'react';
-import { H2, Accent } from './Typography';
-import { Activity, Target, Zap, TrendingDown, Minus, TrendingUp, Plus } from 'lucide-react';
+import { Flame, Target, Dumbbell, Activity, TrendingDown, Zap } from 'lucide-react';
 
-const MacroCalculator = () => {
-  const [form, setForm] = useState({
+interface MacroForm {
+  goal: string;
+  gender: string;
+  age: number;
+  height: number;
+  weight: number;
+  activityIndex: number;
+}
+
+interface MacroResult {
+  calories: number;
+  protein: { g: number; pct: number };
+  fat: { g: number; pct: number };
+  carbs: { g: number; pct: number };
+}
+
+interface SliderProps {
+  label: string;
+  value: number;
+  onChange: (val: number) => void;
+  min: number;
+  max: number;
+  unit: string;
+}
+
+const Slider: React.FC<SliderProps> = ({ label, value, onChange, min, max, unit }) => (
+  <div className="relative group">
+    <div className="flex items-baseline justify-between mb-5">
+      <span className="text-base font-bold text-white uppercase tracking-wide">{label}</span>
+      <div className="flex items-baseline gap-2">
+        <span className="text-5xl font-black text-white tracking-tight">{value}</span>
+        <span className="text-xl font-black text-accent uppercase tracking-wide">{unit}</span>
+      </div>
+    </div>
+    
+    <div className="relative h-4 mb-3">
+      {/* Track Background */}
+      <div className="absolute inset-0 bg-neutral-900 rounded-full overflow-hidden">
+        {/* Active Track */}
+        <div 
+          className="absolute left-0 top-0 bottom-0 bg-gradient-to-r from-accent to-accentHover rounded-full transition-all duration-200"
+          style={{ width: `${((value - min) / (max - min)) * 100}%` }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-[shimmer_2s_infinite]"/>
+        </div>
+      </div>
+      
+      {/* Slider Input */}
+      <input
+        type="range"
+        min={min}
+        max={max}
+        value={value}
+        onChange={(e) => onChange(parseInt(e.target.value))}
+        className="absolute inset-0 w-full opacity-0 cursor-pointer z-10"
+      />
+      
+      {/* Thumb */}
+      <div 
+        className="absolute top-1/2 -translate-y-1/2 w-7 h-7 bg-white rounded-full shadow-[0_0_30px_rgba(220,38,38,0.8)] border-4 border-accent pointer-events-none transition-all duration-200 group-hover:scale-125"
+        style={{ left: `calc(${((value - min) / (max - min)) * 100}% - 14px)` }}
+      />
+    </div>
+    
+    {/* Min/Max Labels */}
+    <div className="flex justify-between text-xs font-bold text-neutral-500">
+      <span>{min}</span>
+      <span>{max}</span>
+    </div>
+  </div>
+);
+
+export const MacroCalculator: React.FC = () => {
+  const [form, setForm] = useState<MacroForm>({
+    goal: 'cut',
     gender: 'male',
-    weight: 80,
-    height: 175,
     age: 30,
-    activity: 1.375,
-    goal: 'cut'
+    height: 175,
+    weight: 80,
+    activityIndex: 1
   });
-  const [result, setResult] = useState(null);
-  const [showResults, setShowResults] = useState(false);
-
-  const activityLevels = [
-    { value: 1.2, label: 'Sedentary', desc: 'Desk job' },
-    { value: 1.375, label: 'Light', desc: '1-3x/week' },
-    { value: 1.55, label: 'Moderate', desc: '3-5x/week' },
-    { value: 1.725, label: 'Active', desc: '6-7x/week' },
-    { value: 1.9, label: 'Athlete', desc: 'Daily 2x' }
-  ];
+  
+  const [result, setResult] = useState<MacroResult | null>(null);
 
   const calculate = () => {
-    const goalMultipliers = {
-      cut: 0.80,
-      maintain: 1.0,
-      bulk: 1.10
-    };
-
-    // BMR (Mifflin-St Jeor)
+    const goalMults: Record<string, number> = { cut: 0.80, maintain: 1.0, bulk: 1.10 };
+    const activityMults = [1.2, 1.375, 1.55, 1.725];
+    
     let bmr = (10 * form.weight) + (6.25 * form.height) - (5 * form.age);
     bmr += form.gender === 'male' ? 5 : -161;
 
-    // TDEE & Target
-    const tdee = Math.round(bmr * form.activity);
-    const targetCals = Math.round(tdee * goalMultipliers[form.goal]);
+    const tdee = bmr * activityMults[form.activityIndex];
+    const targetCals = Math.round(tdee * goalMults[form.goal]);
 
-    // Macros (Protein Priority)
     const proteinG = Math.round(form.weight * 2.2);
     const fatG = Math.round(form.weight * 0.9);
     const proteinCals = proteinG * 4;
     const fatCals = fatG * 9;
-    const carbG = Math.round((targetCals - proteinCals - fatCals) / 4);
+    const remainingCals = Math.max(0, targetCals - (proteinCals + fatCals));
+    const carbG = Math.round(remainingCals / 4);
 
     setResult({
-      tdee,
-      targetCals,
-      protein: proteinG,
-      fat: fatG,
-      carbs: Math.max(0, carbG)
+      calories: targetCals,
+      protein: { g: proteinG, pct: Math.round((proteinCals / targetCals) * 100) },
+      fat: { g: fatG, pct: Math.round((fatCals / targetCals) * 100) },
+      carbs: { g: carbG, pct: Math.round(((carbG * 4) / targetCals) * 100) }
     });
-    setShowResults(true);
   };
 
-  // Stepper Component - iOS Style with +/- buttons
-  const Stepper = ({ label, value, onChange, min, max, unit, step = 1 }) => (
-    <div>
-      <label className="block text-sm font-bold text-white mb-4 uppercase tracking-wider text-center">
-        {label}
-      </label>
-      <div className="flex items-center gap-3">
-        <button
-          onClick={() => onChange(Math.max(min, value - step))}
-          className="flex-shrink-0 w-14 h-14 flex items-center justify-center bg-ink border-2 border-border hover:border-accent shadow-subtle hover:shadow-accent-glow transition-all duration-300 rounded-sm active:scale-95"
-          aria-label={`Decrease ${label}`}
-        >
-          <Minus className="w-6 h-6 text-accent" />
-        </button>
-
-        <div className="flex-1 bg-bg border-2 border-accent shadow-deep rounded-sm p-4 text-center">
-          <div className="font-display text-4xl md:text-5xl text-white tracking-tight leading-none">
-            {value}
+  return (
+    <section className="w-full min-h-screen bg-gradient-to-br from-black via-ink to-black text-white py-16 px-4 flex items-center justify-center relative overflow-hidden border-t border-border">
+      
+      {/* Ambient Background Effects */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-[120px] animate-pulse"/>
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-[120px] animate-pulse" style={{animationDelay: '1s'}}/>
+      
+      <div className="w-full max-w-6xl relative z-10">
+        
+        {/* Header */}
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-3 mb-4">
+            <Zap className="w-5 h-5 text-accent" />
+            <span className="text-sm font-bold text-neutral-400 uppercase tracking-[0.3em]">Precision Nutrition</span>
+            <Zap className="w-5 h-5 text-accent" />
           </div>
-          <div className="text-xs text-muted uppercase tracking-wider mt-1 font-bold">
-            {unit}
-          </div>
+          <h1 className="text-6xl md:text-7xl font-display font-black tracking-[-0.03em] mb-3 text-white">
+            MACRO CALCULATOR
+          </h1>
+          <p className="text-neutral-400 text-lg font-medium">Advanced macronutrient optimization</p>
         </div>
 
-        <button
-          onClick={() => onChange(Math.min(max, value + step))}
-          className="flex-shrink-0 w-14 h-14 flex items-center justify-center bg-ink border-2 border-border hover:border-accent shadow-subtle hover:shadow-accent-glow transition-all duration-300 rounded-sm active:scale-95"
-          aria-label={`Increase ${label}`}
-        >
-          <Plus className="w-6 h-6 text-accent" />
-        </button>
-      </div>
-    </div>
-  );
-
-  return (
-    <section className="bg-ink2 py-20 md:py-32 relative overflow-hidden">
-      {/* Background Accent */}
-      <div className="absolute inset-0 bg-gradient-to-b from-accent/5 to-transparent pointer-events-none" />
-
-      <div className="container mx-auto px-4 md:px-8 relative z-10">
-        <div className="max-w-3xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-12 md:mb-16">
-            <div className="mb-4">
-              <span className="text-xs font-mono uppercase tracking-widest text-muted">TOOLS</span>
-            </div>
-            <H2 className="mb-4 md:mb-6">
-              Calculate Your <Accent>Protocol</Accent>
-            </H2>
-            <p className="text-base md:text-lg text-muted max-w-2xl mx-auto leading-relaxed">
-              Get your personalized macro targets based on the Barakah Body Framework.
-            </p>
-          </div>
-
-          <div className="bg-bg shadow-deep rounded-sm overflow-hidden border-t-2 border-accent">
-            {/* Form */}
-            <div className="p-6 md:p-10">
-              {/* Gender Selection */}
-              <div className="mb-8 md:mb-10">
-                <label className="block text-sm font-bold text-white mb-4 uppercase tracking-wider text-center">
-                  Gender
-                </label>
-                <div className="grid grid-cols-2 gap-3 md:gap-4">
-                  <button
-                    onClick={() => setForm({...form, gender: 'male'})}
-                    className={`p-4 md:p-5 rounded-sm border-2 transition-all duration-300 ${
-                      form.gender === 'male'
-                        ? 'border-accent bg-accent/10 shadow-accent-glow'
-                        : 'border-border hover:border-accent/50 shadow-subtle'
-                    }`}
-                  >
-                    <span className={`font-bold uppercase tracking-wider text-base md:text-lg ${form.gender === 'male' ? 'text-accent' : 'text-muted'}`}>
-                      Male
-                    </span>
-                  </button>
-                  <button
-                    onClick={() => setForm({...form, gender: 'female'})}
-                    className={`p-4 md:p-5 rounded-sm border-2 transition-all duration-300 ${
-                      form.gender === 'female'
-                        ? 'border-accent bg-accent/10 shadow-accent-glow'
-                        : 'border-border hover:border-accent/50 shadow-subtle'
-                    }`}
-                  >
-                    <span className={`font-bold uppercase tracking-wider text-base md:text-lg ${form.gender === 'female' ? 'text-accent' : 'text-muted'}`}>
-                      Female
-                    </span>
-                  </button>
+        <div className="grid lg:grid-cols-2 gap-8">
+          
+          {/* LEFT: INPUT PANEL */}
+          <div className="relative">
+            <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-transparent to-transparent rounded-[32px] blur-xl"/>
+            <div className="relative bg-ink/80 backdrop-blur-2xl border border-border/50 rounded-[32px] p-8 shadow-2xl">
+              
+              {/* Goal Cards */}
+              <div className="mb-8">
+                <h3 className="text-xl font-black text-white uppercase tracking-wide mb-5">Choose Your Goal</h3>
+                <div className="grid grid-cols-1 gap-3">
+                  {[
+                    { id: 'cut', label: 'Fat Loss', icon: Flame },
+                    { id: 'maintain', label: 'Maintain', icon: Target },
+                    { id: 'bulk', label: 'Muscle', icon: Dumbbell }
+                  ].map(g => (
+                    <button
+                      key={g.id}
+                      onClick={() => setForm({...form, goal: g.id})}
+                      className={`relative group overflow-hidden rounded-2xl p-6 transition-all duration-500 ${
+                        form.goal === g.id
+                          ? 'bg-gradient-to-br from-accent to-accentHover shadow-[0_0_40px_rgba(229,9,20,0.3)] scale-[1.02]'
+                          : 'bg-neutral-900/50 hover:bg-neutral-900 border border-border'
+                      }`}
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
+                      <div className="relative flex items-center gap-6">
+                        <g.icon className={`w-8 h-8 ${
+                          form.goal === g.id ? 'text-white' : 'text-neutral-600'
+                        }`} />
+                        <div className={`text-lg font-bold uppercase tracking-wide ${
+                          form.goal === g.id ? 'text-white' : 'text-neutral-500'
+                        }`}>
+                          {g.label}
+                        </div>
+                      </div>
+                    </button>
+                  ))}
                 </div>
               </div>
 
-              {/* Stats - Steppers */}
-              <div className="space-y-6 md:space-y-8 mb-8 md:mb-10">
-                <Stepper
+              <div className="h-[1px] bg-gradient-to-r from-transparent via-neutral-800 to-transparent mb-8"/>
+
+              {/* Gender Toggle */}
+              <div className="mb-8">
+                <h3 className="text-xl font-black text-white uppercase tracking-wide mb-5">Gender</h3>
+                <div className="relative bg-neutral-900/50 p-1.5 rounded-2xl border border-border">
+                  <div 
+                    className="absolute top-1.5 bottom-1.5 w-[calc(50%-6px)] bg-gradient-to-r from-accent to-accentHover rounded-xl transition-all duration-500 shadow-lg"
+                    style={{ left: form.gender === 'male' ? '6px' : 'calc(50% + 2px)' }}
+                  />
+                  {['male', 'female'].map(g => (
+                    <button
+                      key={g}
+                      onClick={() => setForm({...form, gender: g})}
+                      className={`relative z-10 w-1/2 py-4 text-base font-black uppercase tracking-wider rounded-xl transition-colors ${
+                        form.gender === g ? 'text-white' : 'text-neutral-600'
+                      }`}
+                    >
+                      {g}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="h-[1px] bg-gradient-to-r from-transparent via-neutral-800 to-transparent mb-8"/>
+
+              {/* Sliders */}
+              <div className="space-y-8 mb-8">
+                <Slider 
                   label="Age"
                   value={form.age}
                   onChange={(v) => setForm({...form, age: v})}
-                  min={15}
+                  min={16}
                   max={80}
-                  unit="years"
+                  unit="yr"
                 />
-
-                <Stepper
-                  label="Weight"
-                  value={form.weight}
-                  onChange={(v) => setForm({...form, weight: v})}
-                  min={40}
-                  max={200}
-                  unit="kg"
-                />
-
-                <Stepper
+                <Slider 
                   label="Height"
                   value={form.height}
                   onChange={(v) => setForm({...form, height: v})}
@@ -173,195 +217,179 @@ const MacroCalculator = () => {
                   max={220}
                   unit="cm"
                 />
+                <Slider 
+                  label="Weight"
+                  value={form.weight}
+                  onChange={(v) => setForm({...form, weight: v})}
+                  min={40}
+                  max={180}
+                  unit="kg"
+                />
               </div>
 
-              {/* Activity Level */}
-              <div className="mb-8 md:mb-10">
-                <label className="block text-sm font-bold text-white mb-4 uppercase tracking-wider text-center">
-                  Activity Level
-                </label>
-                <div className="grid grid-cols-2 md:grid-cols-5 gap-2 md:gap-3">
-                  {activityLevels.map((level) => (
+              <div className="h-[1px] bg-gradient-to-r from-transparent via-neutral-800 to-transparent mb-8"/>
+
+              {/* Activity Selector */}
+              <div className="mb-8">
+                <h3 className="text-xl font-black text-white uppercase tracking-wide mb-5">Activity Level</h3>
+                <div className="space-y-2">
+                  {[
+                    { label: 'Sedentary', sublabel: 'Desk job, minimal movement' },
+                    { label: 'Light', sublabel: 'Exercise 1-3 times per week' },
+                    { label: 'Moderate', sublabel: 'Exercise 3-5 times per week' },
+                    { label: 'Very Active', sublabel: 'Exercise 6-7 times per week' }
+                  ].map((level, idx) => (
                     <button
-                      key={level.value}
-                      onClick={() => setForm({...form, activity: level.value})}
-                      className={`p-3 md:p-4 rounded-sm border-2 transition-all duration-300 text-center ${
-                        form.activity === level.value
-                          ? 'border-accent bg-accent/10 shadow-accent-glow'
-                          : 'border-border hover:border-accent/50 shadow-subtle'
+                      key={idx}
+                      onClick={() => setForm({...form, activityIndex: idx})}
+                      className={`relative w-full group overflow-hidden rounded-xl p-5 text-left transition-all duration-300 ${
+                        form.activityIndex === idx
+                          ? 'bg-gradient-to-r from-accent to-accentHover shadow-[0_0_20px_rgba(229,9,20,0.2)]'
+                          : 'bg-neutral-900/50 hover:bg-neutral-900 border border-border'
                       }`}
                     >
-                      <div className={`text-xs md:text-sm font-bold uppercase mb-1 ${form.activity === level.value ? 'text-accent' : 'text-muted'}`}>
-                        {level.label}
+                      <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"/>
+                      <div className="relative flex items-center justify-between">
+                        <div>
+                          <div className={`text-base font-bold tracking-wide mb-1 ${
+                            form.activityIndex === idx ? 'text-white' : 'text-neutral-300'
+                          }`}>
+                            {level.label}
+                          </div>
+                          <div className={`text-xs font-medium ${
+                            form.activityIndex === idx ? 'text-red-200' : 'text-neutral-600'
+                          }`}>
+                            {level.sublabel}
+                          </div>
+                        </div>
+                        <div className="flex gap-1">
+                          {[...Array(idx + 1)].map((_, i) => (
+                            <div key={i} className={`w-2 h-6 rounded-full ${
+                              form.activityIndex === idx ? 'bg-white/50' : 'bg-neutral-700'
+                            }`}/>
+                          ))}
+                        </div>
                       </div>
-                      <div className="text-[10px] md:text-xs text-muted/70 leading-tight">{level.desc}</div>
                     </button>
                   ))}
-                </div>
-              </div>
-
-              {/* Goal Selection */}
-              <div className="mb-8 md:mb-10">
-                <label className="block text-sm font-bold text-white mb-4 uppercase tracking-wider text-center">
-                  Goal
-                </label>
-                <div className="grid grid-cols-3 gap-3 md:gap-4">
-                  <button
-                    onClick={() => setForm({...form, goal: 'cut'})}
-                    className={`p-5 md:p-6 rounded-sm border-2 transition-all duration-300 ${
-                      form.goal === 'cut'
-                        ? 'border-accent bg-accent/10 shadow-accent-glow'
-                        : 'border-border hover:border-accent/50 shadow-subtle'
-                    }`}
-                  >
-                    <TrendingDown className={`w-6 h-6 md:w-7 md:h-7 mx-auto mb-2 ${form.goal === 'cut' ? 'text-accent' : 'text-muted'}`} />
-                    <div className={`text-xs md:text-sm font-bold uppercase tracking-wider ${form.goal === 'cut' ? 'text-accent' : 'text-muted'}`}>
-                      Cut
-                    </div>
-                    <div className="text-[10px] md:text-xs text-muted mt-1">Lose Fat</div>
-                  </button>
-
-                  <button
-                    onClick={() => setForm({...form, goal: 'maintain'})}
-                    className={`p-5 md:p-6 rounded-sm border-2 transition-all duration-300 ${
-                      form.goal === 'maintain'
-                        ? 'border-accent bg-accent/10 shadow-accent-glow'
-                        : 'border-border hover:border-accent/50 shadow-subtle'
-                    }`}
-                  >
-                    <Minus className={`w-6 h-6 md:w-7 md:h-7 mx-auto mb-2 ${form.goal === 'maintain' ? 'text-accent' : 'text-muted'}`} />
-                    <div className={`text-xs md:text-sm font-bold uppercase tracking-wider ${form.goal === 'maintain' ? 'text-accent' : 'text-muted'}`}>
-                      Maintain
-                    </div>
-                    <div className="text-[10px] md:text-xs text-muted mt-1">Stay Lean</div>
-                  </button>
-
-                  <button
-                    onClick={() => setForm({...form, goal: 'bulk'})}
-                    className={`p-5 md:p-6 rounded-sm border-2 transition-all duration-300 ${
-                      form.goal === 'bulk'
-                        ? 'border-accent bg-accent/10 shadow-accent-glow'
-                        : 'border-border hover:border-accent/50 shadow-subtle'
-                    }`}
-                  >
-                    <TrendingUp className={`w-6 h-6 md:w-7 md:h-7 mx-auto mb-2 ${form.goal === 'bulk' ? 'text-accent' : 'text-muted'}`} />
-                    <div className={`text-xs md:text-sm font-bold uppercase tracking-wider ${form.goal === 'bulk' ? 'text-accent' : 'text-muted'}`}>
-                      Bulk
-                    </div>
-                    <div className="text-[10px] md:text-xs text-muted mt-1">Build Mass</div>
-                  </button>
                 </div>
               </div>
 
               {/* Calculate Button */}
               <button
                 onClick={calculate}
-                className="w-full bg-accent hover:bg-accentHover text-white font-display text-lg md:text-xl uppercase tracking-wider py-5 md:py-6 rounded-sm shadow-elevated hover:shadow-accent-glow-strong transition-all duration-300 active:scale-[0.98]"
+                className="group relative w-full overflow-hidden rounded-2xl bg-gradient-to-r from-accent to-accentHover hover:from-accentHover hover:to-red-700 py-6 transition-all duration-300 active:scale-[0.98] shadow-lg shadow-accent/40"
               >
-                Calculate Protocol
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"/>
+                <span className="relative text-lg font-black uppercase tracking-[0.15em] text-white flex items-center justify-center gap-3">
+                  Calculate Macros
+                  <Activity className="w-5 h-5" />
+                </span>
               </button>
+
             </div>
+          </div>
 
-            {/* Results */}
-            {showResults && result && (
-              <div className="border-t-2 border-border bg-ink p-6 md:p-10 animate-fade-in">
-                {/* Main Calorie Target */}
-                <div className="text-center mb-10 md:mb-12 pb-10 md:pb-12 border-b border-border">
-                  <div className="mb-2">
-                    <span className="text-xs font-mono uppercase tracking-widest text-muted">Daily Target</span>
+          {/* RIGHT: RESULTS PANEL */}
+          <div className={`relative transition-all duration-700 ${result ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8 pointer-events-none'}`}>
+            {result && (
+              <>
+                <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-transparent to-transparent rounded-[32px] blur-xl"/>
+                <div className="relative bg-ink/80 backdrop-blur-2xl border border-border/50 rounded-[32px] p-8 shadow-2xl">
+                  
+                  {/* Calorie Hero */}
+                  <div className="text-center mb-10 relative">
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-48 h-48 bg-accent/20 rounded-full blur-[80px] animate-pulse"/>
+                    </div>
+                    <div className="relative">
+                      <div className="text-sm font-bold text-neutral-400 uppercase tracking-[0.3em] mb-3">
+                        Daily Target
+                      </div>
+                      <div className="inline-flex items-baseline gap-3 mb-2">
+                        <span className="text-7xl md:text-8xl font-black tracking-[-0.04em] text-white">
+                          {result.calories.toLocaleString()}
+                        </span>
+                        <span className="text-2xl font-black text-accent tracking-wider mb-4">KCAL</span>
+                      </div>
+                      <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neutral-900/50 border border-neutral-800/50">
+                        <div className="w-2 h-2 bg-accent rounded-full animate-pulse"/>
+                        <span className="text-sm font-bold text-neutral-300">
+                          {form.goal === 'cut' ? 'Fat Loss' : form.goal === 'bulk' ? 'Muscle Gain' : 'Maintenance'} Protocol
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="font-display text-5xl md:text-7xl lg:text-8xl text-white mb-2 tracking-tight">
-                    {result.targetCals.toLocaleString()}
+
+                  <div className="h-[1px] bg-gradient-to-r from-transparent via-neutral-800 to-transparent mb-8"/>
+
+                  {/* Macro Breakdown */}
+                  <div className="space-y-5">
+                    {[
+                      { label: 'PROTEIN', data: result.protein, color: 'from-accent to-accentHover', icon: TrendingDown },
+                      { label: 'CARBS', data: result.carbs, color: 'from-neutral-700 to-neutral-800', icon: Zap },
+                      { label: 'FATS', data: result.fat, color: 'from-neutral-600 to-neutral-700', icon: Flame }
+                    ].map((macro, idx) => (
+                      <div key={idx} className="relative group">
+                        <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"/>
+                        <div className="relative bg-neutral-900/50 border border-neutral-800/50 rounded-2xl p-6 transition-all duration-300 group-hover:border-neutral-700/50">
+                          <div className="flex items-center justify-between mb-4">
+                            <div className="flex items-center gap-4">
+                              <macro.icon className="w-8 h-8 text-accent" />
+                              <div>
+                                <div className="text-2xl font-black text-white tracking-tight">{macro.label}</div>
+                                <div className="text-sm font-bold text-neutral-500 uppercase tracking-wider">
+                                  {macro.data.pct}% of intake
+                                </div>
+                              </div>
+                            </div>
+                            <div className="text-right">
+                              <div className="text-5xl font-black text-white tracking-tight">
+                                {macro.data.g}
+                              </div>
+                              <div className="text-base font-bold text-neutral-500 uppercase">grams</div>
+                            </div>
+                          </div>
+                          
+                          <div className="relative h-3 bg-black/30 rounded-full overflow-hidden">
+                            <div 
+                              className={`h-full bg-gradient-to-r ${macro.color} rounded-full transition-all duration-1000 ease-out`}
+                              style={{ 
+                                width: `${macro.data.pct}%`,
+                                animationDelay: `${idx * 150}ms`
+                              }}
+                            />
+                            {idx === 0 && (
+                              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full animate-[shimmer_3s_infinite]"/>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                  <div className="text-accent text-lg md:text-xl font-bold uppercase tracking-wider">Calories</div>
-                  <div className="mt-3 md:mt-4 text-sm text-muted">
-                    TDEE: {result.tdee.toLocaleString()} cal
+
+                  {/* Footer */}
+                  <div className="mt-8 pt-6 border-t border-neutral-900/50">
+                    <p className="text-xs text-neutral-500 text-center leading-relaxed tracking-wide">
+                      Based on Mifflin-St Jeor BMR • 2.2g protein/kg • Optimized for your goals
+                    </p>
                   </div>
+
                 </div>
-
-                {/* Macro Breakdown */}
-                <div className="space-y-5 md:space-y-6">
-                  {/* Protein */}
-                  <div className="group">
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center gap-2 md:gap-3">
-                        <Zap className="w-5 h-5 text-accent" />
-                        <span className="font-bold text-white uppercase tracking-wider text-sm md:text-base">Protein</span>
-                      </div>
-                      <div className="text-right">
-                        <div className="font-display text-2xl md:text-3xl text-white">{result.protein}</div>
-                        <div className="text-xs text-muted uppercase">grams</div>
-                      </div>
-                    </div>
-                    <div className="h-3 bg-bg rounded-full overflow-hidden shadow-inner-subtle">
-                      <div className="h-full bg-accent shadow-accent-glow transition-all duration-700" style={{width: '100%'}} />
-                    </div>
-                  </div>
-
-                  {/* Carbs */}
-                  <div className="group">
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center gap-2 md:gap-3">
-                        <Activity className="w-5 h-5 text-white" />
-                        <span className="font-bold text-white uppercase tracking-wider text-sm md:text-base">Carbs</span>
-                      </div>
-                      <div className="text-right">
-                        <div className="font-display text-2xl md:text-3xl text-white">{result.carbs}</div>
-                        <div className="text-xs text-muted uppercase">grams</div>
-                      </div>
-                    </div>
-                    <div className="h-3 bg-bg rounded-full overflow-hidden shadow-inner-subtle">
-                      <div className="h-full bg-white shadow-elevated transition-all duration-700" style={{width: `${Math.min((result.carbs / result.protein) * 100, 100)}%`}} />
-                    </div>
-                  </div>
-
-                  {/* Fats */}
-                  <div className="group">
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center gap-2 md:gap-3">
-                        <Target className="w-5 h-5 text-muted" />
-                        <span className="font-bold text-white uppercase tracking-wider text-sm md:text-base">Fats</span>
-                      </div>
-                      <div className="text-right">
-                        <div className="font-display text-2xl md:text-3xl text-white">{result.fat}</div>
-                        <div className="text-xs text-muted uppercase">grams</div>
-                      </div>
-                    </div>
-                    <div className="h-3 bg-bg rounded-full overflow-hidden shadow-inner-subtle">
-                      <div className="h-full bg-muted shadow-subtle transition-all duration-700" style={{width: `${(result.fat / result.protein) * 100}%`}} />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Footer Note */}
-                <div className="mt-8 md:mt-10 p-5 md:p-6 bg-bg border-2 border-accent/20 rounded-sm">
-                  <p className="text-xs md:text-sm text-muted text-center leading-relaxed">
-                    <span className="text-accent font-bold">Protein priority approach:</span> 2.2g per kg body weight to preserve muscle during fat loss or support growth during bulking.
-                  </p>
-                </div>
-              </div>
+              </>
             )}
           </div>
+
         </div>
+
       </div>
 
-      <style jsx>{`
-        @keyframes fade-in {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        .animate-fade-in {
-          animation: fade-in 0.6s ease-out;
+      <style>{`
+        @keyframes shimmer {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
         }
       `}</style>
     </section>
   );
 };
-
-export default MacroCalculator;

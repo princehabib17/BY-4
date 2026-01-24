@@ -1,31 +1,46 @@
 import React from 'react';
 
-export const Display: React.FC<{ children: React.ReactNode, className?: string }> = ({ children, className = '' }) => (
-  <h1 className={`font-display text-5xl md:text-7xl font-bold uppercase tracking-wider leading-[1.1] ${className}`} style={{ textShadow: '0 4px 12px rgba(0,0,0,0.8), 0 2px 4px rgba(0,0,0,0.6)' }}>
+interface TextProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+export const Display: React.FC<TextProps> = ({ children, className = '' }) => (
+  <h1 className={`font-display text-5xl md:text-8xl lg:text-[9rem] font-bold uppercase tracking-tighter leading-[0.85] ${className}`}>
     {children}
   </h1>
 );
 
-export const H2: React.FC<{ children: React.ReactNode, className?: string }> = ({ children, className = '' }) => (
-  <h2 className={`font-display text-3xl md:text-5xl font-bold uppercase tracking-wider mb-6 leading-[1.2] ${className}`} style={{ textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}>
+export const H2: React.FC<TextProps> = ({ children, className = '' }) => (
+  <h2 className={`font-display text-4xl md:text-6xl font-bold uppercase tracking-tight leading-[1] mb-6 ${className}`}>
     {children}
   </h2>
 );
 
-export const H3: React.FC<{ children: React.ReactNode, className?: string }> = ({ children, className = '' }) => (
-  <h3 className={`font-sans text-xl md:text-2xl font-bold tracking-wide uppercase mb-3 leading-[1.3] ${className}`} style={{ textShadow: '0 1px 4px rgba(0,0,0,0.3)' }}>
+export const H3: React.FC<TextProps> = ({ children, className = '' }) => (
+  <h3 className={`font-display text-2xl md:text-3xl font-bold uppercase tracking-tight leading-none mb-4 ${className}`}>
     {children}
   </h3>
 );
 
-export const Lead: React.FC<{ children: React.ReactNode, className?: string }> = ({ children, className = '' }) => (
-  <p className={`font-sans text-lg md:text-xl text-muted leading-[1.8] tracking-wide ${className}`}>
+export const Label: React.FC<TextProps> = ({ children, className = '' }) => (
+  <span className={`font-mono text-[10px] md:text-xs uppercase tracking-[0.3em] font-bold text-muted ${className}`}>
+    {children}
+  </span>
+);
+
+export const Lead: React.FC<TextProps> = ({ children, className = '' }) => (
+  <p className={`font-sans text-lg md:text-2xl text-muted leading-relaxed tracking-tight ${className}`}>
+    {children}
+  </p>
+);
+
+export const Body: React.FC<TextProps> = ({ children, className = '' }) => (
+  <p className={`font-sans text-base md:text-lg text-muted leading-relaxed ${className}`}>
     {children}
   </p>
 );
 
 export const Accent: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <span className="text-accent bg-gradient-to-r from-accent to-red-600 bg-clip-text text-transparent" style={{ textShadow: '0 0 20px rgba(229, 9, 20, 0.5)' }}>
-    {children}
-  </span>
+  <span className="text-accent">{children}</span>
 );

@@ -15,18 +15,23 @@ export const Button: React.FC<ButtonProps> = ({
   withIcon = false,
   ...props 
 }) => {
-  const baseStyles = "inline-flex items-center justify-center uppercase font-bold tracking-wider transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-black disabled:opacity-50 disabled:cursor-not-allowed";
-
+  // Base styles: Unified to the "Hero" aesthetic
+  // Added shadow-accent/20 and hover effects to everything by default
+  const baseStyles = "inline-flex items-center justify-center uppercase font-bold tracking-wider transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black disabled:opacity-50 disabled:cursor-not-allowed transform active:scale-95";
+  
   const variants = {
-    primary: "bg-accent text-white hover:bg-accentHover shadow-elevated hover:shadow-accent-glow-strong",
-    ghost: "bg-transparent text-text shadow-subtle hover:shadow-accent-glow hover:text-accent",
-    outline: "bg-transparent text-text shadow-subtle hover:bg-ink2 hover:shadow-elevated"
+    // Primary is now the "Hero" style
+    primary: "bg-accent text-white hover:bg-accentHover shadow-[0_4px_14px_0_rgba(229,9,20,0.39)] hover:shadow-[0_6px_20px_rgba(229,9,20,0.23)] hover:-translate-y-0.5 animate-[pulse_4s_infinite]",
+    // Ghost variant updated to be more aggressive but transparent
+    ghost: "bg-transparent text-white border-2 border-accent/50 hover:bg-accent hover:border-accent shadow-[0_0_15px_rgba(229,9,20,0.1)] hover:shadow-[0_0_25px_rgba(229,9,20,0.4)]",
+    // Outline kept simple for secondary actions if needed, but styling closer to primary
+    outline: "bg-transparent text-white border-2 border-white/20 hover:border-white hover:bg-white/5"
   };
 
   const sizes = {
     sm: "h-10 px-4 text-xs",
     md: "h-12 px-6 text-sm",
-    lg: "h-14 px-8 text-base",
+    lg: "h-14 px-10 text-base md:text-lg",
   };
 
   return (
@@ -35,7 +40,7 @@ export const Button: React.FC<ButtonProps> = ({
       {...props}
     >
       {children}
-      {withIcon && <ArrowRight className="ml-2 w-4 h-4" />}
+      {withIcon && <ArrowRight className="ml-2 w-5 h-5" />}
     </button>
   );
 };
