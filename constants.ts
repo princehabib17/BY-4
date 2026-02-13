@@ -64,12 +64,11 @@ export const NAV_ITEMS: NavItem[] = [
 export const PILLARS: ProgramPillar[] = [
   {
     title: "Time Efficient Training",
-    desc: "Strength and fat loss through high-impact workouts that fit into a busy schedule, without spending hours in the gym.",
+    desc: "Strength training and fat loss through high-impact sessions that fit into a busy schedule, without spending hours in the gym.",
     icon: "Clock",
     benefits: [
-      "45-Min High-Output Sessions",
+      "45-60 Min Sessions",
       "3-4 Days Per Week Frequency",
-      "Science-Based Hypertrophy",
       "Zero 'Junk Volume'"
     ]
   },
@@ -78,10 +77,9 @@ export const PILLARS: ProgramPillar[] = [
     desc: "Removes complexity from nutrition, making fat loss and muscle growth sustainable without living in the kitchen or giving up the foods you enjoy.",
     icon: "Activity",
     benefits: [
-      "High-Protein Simple Recipes",
-      "No Obsessive Macro Tracking",
-      "Family-Friendly Meals",
-      "Sustainable Energy Levels"
+      "Updated meal plans",
+      "Includes food you enjoy",
+      "Meal prepping made simple"
     ]
   },
   {
@@ -89,9 +87,8 @@ export const PILLARS: ProgramPillar[] = [
     desc: "Creates consistency by enforcing structure and excellence, especially when motivation is low.",
     icon: "Target",
     benefits: [
-      "Daily Fajr Check-ins",
-      "Private Brotherhood Group",
-      "Weekly Form Reviews",
+      "Weekly check in call",
+      "24hr customer support",
       "Spiritual & Physical Alignment"
     ]
   }

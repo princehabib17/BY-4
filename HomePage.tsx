@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Button } from './components/Button';
 import { Section } from './components/Section';
-import { Display, H2, H3, Lead, Body, Accent } from './components/Typography';
+import { Display, H2, H3, Lead, Body, Accent, Label } from './components/Typography';
 import { IMAGES, PILLARS, TRANSFORMATIONS, CASE_STUDY } from './constants';
 import { CheckCircle, Activity, Target, Clock, ArrowRight, Moon, Shield } from 'lucide-react';
 import { MacroCalculator } from './components/MacroCalculator';
@@ -72,19 +72,20 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
            <img 
              src={IMAGES.hero} 
              alt="Brother Yusuf Fit" 
-             className="w-full h-full object-cover object-[50%_35%] brightness-110 contrast-110 saturate-[1.05]" 
+             className="w-full h-full object-cover object-top brightness-110 contrast-110 saturate-[1.05]" 
            />
            <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/40 to-transparent z-10" />
            <div className="absolute inset-0 bg-gradient-to-r from-bg/20 via-transparent to-bg/20 z-10" />
         </div>
 
         <div className="container mx-auto px-4 md:px-8 relative z-20">
-          <div className="max-w-6xl">
-            <Display className="mb-6 drop-shadow-[0_4px_8px_rgba(0,0,0,0.9)]">
-              YOU'RE WINNING ON PAPER, BUT <Accent>LOSING YOUR BODY</Accent> AND HEALTH.
+          <div className="max-w-7xl">
+            <Label className="mb-4 text-accent">Elite Coaching for Muslim Men</Label>
+            <Display className="mb-6 drop-shadow-[0_4px_8px_rgba(0,0,0,0.9)] max-w-6xl">
+              YOU’RE WINNING ON PAPER BUT <Accent>FAILING YOUR BODY</Accent> AND HEALTH.
             </Display>
             <Lead className="mb-10 text-white font-medium max-w-2xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
-              Build real strength, master your bags and lose 20–50 lbs through my Baraka Body Framework, inshallah.
+              Build real strength, master your nafs and lose 20-50lbs through The Barakah Body Framework, inshallah.
             </Lead>
             
             <div className="flex flex-wrap gap-4">
@@ -98,82 +99,105 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
 
       {/* SECTION 2: FEATURED CASE STUDY */}
       <Section darker className="border-t-2 border-accent/10 overflow-hidden">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <div className="text-center mb-20">
+            <Label className="mb-4">Real Results</Label>
             <H2>Client <Accent>Transformation</Accent></H2>
             <Lead className="max-w-2xl mx-auto">Successful in career, providing for family, but losing the battle internally. This is the starting point for most high-performers.</Lead>
           </div>
 
-          {/* Day 1 */}
-          <div className="mb-24 relative border-l-2 border-border pl-6 md:pl-12 pb-8">
-             <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-border"></div>
-             
-             <div className="mb-8">
-               <H3 className="text-white">Day 01: The Fog</H3>
-             </div>
+          {/* Timeline Layout */}
+          <div className="relative border-l-2 border-border ml-4 md:ml-0 md:pl-0">
+            
+            {/* Day 1 */}
+            <div className="mb-24 relative pl-8 md:pl-12">
+               <div className="absolute -left-[9px] top-2 w-4 h-4 rounded-full bg-border ring-4 ring-bg"></div>
+               
+               <div className="grid md:grid-cols-2 gap-12 items-start">
+                 <div>
+                    <Label className="mb-2 text-muted">The Beginning</Label>
+                    <H3 className="text-white mb-6">Day 01: The Fog</H3>
+                    <ul className="space-y-6">
+                      {CASE_STUDY.beforePoints.map((point, i) => (
+                        <li key={i} className="flex items-start gap-4">
+                          <ArrowRight className="w-5 h-5 text-accent shrink-0 mt-1" />
+                          <Body>{point}</Body>
+                        </li>
+                      ))}
+                    </ul>
+                 </div>
+                 <div className="relative group bg-neutral-900 border border-border aspect-[3/4]">
+                    <div className="absolute inset-0 bg-accent/10 transform translate-x-4 translate-y-4 -z-10 border border-border" />
+                    <img 
+                      src={CASE_STUDY.beforeImg} 
+                      alt="Day 1" 
+                      className="w-full h-full object-cover grayscale brightness-90"
+                    />
+                 </div>
+               </div>
+            </div>
 
-             <div className="relative mb-10 group max-w-2xl">
-                <img 
-                  src={CASE_STUDY.beforeImg} 
-                  alt="Day 1" 
-                  className="w-full aspect-[4/5] md:aspect-video object-cover grayscale brightness-90 border border-border"
-                />
-             </div>
+            {/* Week 12 */}
+            <div className="relative pl-8 md:pl-12 border-l-2 border-accent -ml-[2px]">
+               <div className="absolute -left-[9px] top-2 w-4 h-4 rounded-full bg-accent shadow-[0_0_15px_rgba(229,9,20,0.8)] animate-pulse ring-4 ring-bg"></div>
 
-             <ul className="space-y-6 max-w-2xl">
-                {CASE_STUDY.beforePoints.map((point, i) => (
-                  <li key={i} className="flex items-start gap-4">
-                    <ArrowRight className="w-5 h-5 text-accent shrink-0 mt-1" />
-                    <Body>{point}</Body>
-                  </li>
-                ))}
-             </ul>
-          </div>
-
-          {/* Week 12 */}
-          <div className="relative border-l-2 border-accent pl-6 md:pl-12">
-             <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-accent shadow-[0_0_15px_rgba(229,9,20,0.8)] animate-pulse"></div>
-
-             <div className="mb-8">
-               <H3 className="text-white">Week 12: The Result</H3>
-             </div>
-
-             <div className="relative mb-10 max-w-2xl">
-                <img 
-                  src={CASE_STUDY.afterImg} 
-                  alt="Week 12" 
-                  className="w-full aspect-[4/5] md:aspect-video object-cover saturate-110 border-2 border-accent/20 shadow-[0_0_40px_rgba(229,9,20,0.15)]"
-                />
-             </div>
-
-             <div className="bg-gradient-to-r from-accent/5 to-transparent p-6 md:p-10 border-l-4 border-accent max-w-2xl">
-                <ul className="space-y-6">
-                  {CASE_STUDY.afterPoints.map((point, i) => (
-                    <li key={i} className="flex items-start gap-4">
-                      <CheckCircle className="w-6 h-6 text-accent shrink-0 mt-1" />
-                      <span className="font-display text-xl md:text-3xl text-white uppercase">{point}</span>
-                    </li>
-                  ))}
-                </ul>
-             </div>
+               <div className="grid md:grid-cols-2 gap-12 items-start">
+                 <div className="md:order-2">
+                    <Label className="mb-2 text-accent">The Outcome</Label>
+                    <H3 className="text-white mb-6">Week 12: The Result</H3>
+                    <div className="bg-gradient-to-r from-accent/5 to-transparent p-6 md:p-8 border-l-4 border-accent">
+                      <ul className="space-y-6">
+                        {CASE_STUDY.afterPoints.map((point, i) => (
+                          <li key={i} className="flex items-start gap-4">
+                            <CheckCircle className="w-6 h-6 text-accent shrink-0 mt-1" />
+                            <span className="font-display text-xl md:text-2xl text-white uppercase">{point}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                 </div>
+                 <div className="md:order-1 relative group bg-neutral-900 border-2 border-accent/20 aspect-[3/4]">
+                    <div className="absolute inset-0 bg-accent/20 transform -translate-x-4 translate-y-4 -z-10 border border-accent/30" />
+                    <img 
+                      src={CASE_STUDY.afterImg} 
+                      alt="Week 12" 
+                      className="w-full h-full object-cover saturate-110 shadow-[0_0_40px_rgba(229,9,20,0.15)]"
+                    />
+                 </div>
+               </div>
+            </div>
           </div>
         </div>
       </Section>
 
-      {/* SECTION 3: TRANSFORMATIONS (Side-by-side) */}
+      {/* SECTION 3: TRANSFORMATIONS */}
       <Section>
-        {/* Removed "Proven Results" Heading as requested */}
         <div className="container mx-auto max-w-6xl">
-          <div className="grid md:grid-cols-2 gap-12">
+          <div className="text-center mb-16">
+             <Label className="mb-4">Proof of Work</Label>
+             <H2>More <Accent>Stories</Accent></H2>
+          </div>
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12">
             {TRANSFORMATIONS.map((t) => (
-              <div key={t.id} className="relative group border border-border overflow-hidden bg-ink">
-                <div className="grid grid-cols-2 aspect-square md:aspect-video">
+              <div key={t.id} className="relative group bg-ink border border-border hover:border-accent/30 transition-colors">
+                <div className="grid grid-cols-2 aspect-[3/4] bg-neutral-900">
                   <div className="relative border-r border-border/50 overflow-hidden">
+                    <div className="absolute top-4 left-4 z-10 bg-black/70 backdrop-blur px-3 py-1">
+                       <Label className="text-white text-[10px] tracking-widest">Before</Label>
+                    </div>
                     <img src={t.beforeImg} alt="Before" className="w-full h-full object-cover grayscale transition-transform duration-700 group-hover:scale-105" />
                   </div>
                   <div className="relative overflow-hidden">
+                    <div className="absolute top-4 left-4 z-10 bg-accent px-3 py-1">
+                       <Label className="text-white text-[10px] tracking-widest">After</Label>
+                    </div>
                     <img src={t.afterImg} alt="After" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                   </div>
+                </div>
+                <div className="p-6 border-t border-border">
+                   <H3 className="text-xl mb-2">{t.name}</H3>
+                   <p className="font-display text-accent text-lg mb-4">{t.result}</p>
+                   <Body className="italic text-sm">"{t.quote}"</Body>
                 </div>
               </div>
             ))}
@@ -185,19 +209,22 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
       </Section>
 
       {/* SECTION 4: THE ORIGIN / ABOUT */}
-      <section id="about" className="relative bg-bg pb-16 md:pb-24 lg:pb-32">
-          <div className="py-16 md:py-24 lg:py-32 text-center border-b border-border/50 px-4">
-              <H2>About me: <span className="text-white">I was not always the man you see today</span></H2>
+      <section id="about" className="relative bg-bg pb-32">
+          <div className="py-24 text-center border-b border-border/50 px-4 max-w-4xl mx-auto">
+              <Label className="mb-4">The Origin Story</Label>
+              <H2 className="mb-6">About <Accent>Brother Yusuf</Accent></H2>
+              <Lead>I was not always the man you see today. I rebuilt myself from the ground up.</Lead>
           </div>
 
           <div className="hidden lg:block relative border-b border-border">
-             <div className="container mx-auto max-w-7xl grid grid-cols-2 gap-16 px-8">
-                <div className="sticky top-24 h-[calc(100vh-6rem)] w-full py-12">
+             {/* Sticky container setup with h-screen to ensure full viewport tracking */}
+             <div className="container mx-auto max-w-7xl grid grid-cols-2 gap-16 px-8 items-start">
+                <div className="sticky top-0 h-screen w-full pt-24 pb-12 self-start">
                    <div className="relative w-full h-full rounded-sm overflow-hidden border-2 border-border bg-ink shadow-2xl">
                       {CHAPTERS.map((chapter, index) => (
                          <div 
                            key={chapter.id}
-                           className={`absolute inset-0 transition-all duration-700 ease-in-out transform ${
+                           className={`absolute inset-0 transition-all duration-700 ease-in-out transform bg-neutral-900 ${
                              activeChapter === index ? 'opacity-100 scale-100' : 
                              'opacity-0 scale-110'
                            }`}
@@ -205,17 +232,17 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
                             <img 
                               src={chapter.image} 
                               alt={chapter.title} 
-                              className={`w-full h-full object-cover transition-all duration-1000 ${index === 0 ? 'grayscale contrast-125' : ''}`} 
+                              className={`w-full h-full object-cover object-top transition-all duration-1000 ${index === 0 ? 'grayscale contrast-125' : ''}`} 
                             />
-                            <div className={`absolute inset-0 bg-gradient-to-t ${chapter.color} opacity-90`} />
                             
-                            <div className="absolute top-8 left-8 bg-black/80 backdrop-blur border border-white/10 px-4 py-2 flex items-center gap-3 shadow-xl">
+                            <div className="absolute top-8 left-8 bg-black/80 backdrop-blur border border-white/10 px-4 py-2 flex items-center gap-3 shadow-xl z-10">
                                <chapter.icon className="w-4 h-4 text-accent" />
+                               <span className="font-display uppercase text-sm tracking-wider">Chapter 0{chapter.id}</span>
                             </div>
                          </div>
                       ))}
                       
-                      <div className="absolute bottom-8 left-8 flex gap-2">
+                      <div className="absolute bottom-8 left-8 flex gap-2 z-10">
                          {CHAPTERS.map((_, i) => (
                            <div key={i} className={`h-1 transition-all duration-300 ${activeChapter === i ? 'w-12 bg-accent' : 'w-4 bg-white/20'}`} />
                          ))}
@@ -234,14 +261,12 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
                             : 'opacity-20 translate-x-4 grayscale'
                         }`}
                       >
-                         {/* Removed numbering text here */}
                          <H2 className="relative z-10">{chapter.title}</H2>
                          <div className="w-16 h-1 bg-accent mb-10"></div>
                          <Lead className="text-white font-light mb-8">
                            {chapter.text}
                          </Lead>
                          
-                         {/* CTA after the last chapter */}
                          {index === CHAPTERS.length - 1 && (
                             <div className="mt-8">
                                 <Button onClick={onApply} size="lg" withIcon>Apply Now</Button>
@@ -256,25 +281,24 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
           <div className="lg:hidden pb-0">
              {CHAPTERS.map((chapter, index) => (
                 <div key={chapter.id} className="relative h-screen sticky top-0 flex items-end border-b-4 border-black">
-                   <div className="absolute inset-0 z-0">
+                   <div className="absolute inset-0 z-0 bg-neutral-900">
                       <img 
                         src={chapter.image} 
                         alt={chapter.title} 
-                        className={`w-full h-full object-cover object-center ${index === 0 ? 'grayscale contrast-125' : ''}`} 
+                        className={`w-full h-full object-cover object-top ${index === 0 ? 'grayscale contrast-125' : ''}`} 
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/80 to-transparent opacity-100" />
                    </div>
 
                    <div className="relative z-10 w-full p-6 pb-32 flex flex-col items-start">
-                      {/* Removed "Chapter 0X" text badge */}
-                      <div className="mb-4 text-accent">
-                         <chapter.icon className="w-8 h-8 drop-shadow-lg" />
+                      <div className="mb-4 text-accent flex items-center gap-2">
+                         <chapter.icon className="w-6 h-6 drop-shadow-lg" />
+                         <span className="font-mono text-xs uppercase tracking-widest text-white/80">Chapter 0{index + 1}</span>
                       </div>
                       <H2 className="text-white mb-4 drop-shadow-xl">{chapter.title}</H2>
                       <Body className="text-gray-200 border-l-2 border-accent pl-4 mb-8">
                          {chapter.text}
                       </Body>
-                      {/* CTA after the last chapter */}
                       {index === CHAPTERS.length - 1 && (
                             <div className="w-full">
                                 <Button onClick={onApply} size="lg" className="w-full">Apply Now</Button>
@@ -289,9 +313,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
       {/* SECTION 5: THE FRAMEWORK */}
       <Section id="method">
         <div className="text-center max-w-3xl mx-auto mb-20">
+          <Label className="mb-4">The Methodology</Label>
           <H2>The <Accent>Barakah Body</Accent> Framework</H2>
           <Lead>
-            Proven system that has helped Muslim men transform their bodies while building discipline that carries into every area of life. It was designed specifically for men with demanding careers.
+            Proven system that has helped Muslim men transform their bodies while building discipline that carries into every area of life.
           </Lead>
         </div>
 
@@ -317,7 +342,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
                 {/* Content */}
                 <div className="relative z-10 flex-grow">
                   <H3 className="mb-4 group-hover:translate-x-1 transition-transform duration-300">{pillar.title}</H3>
-                  <Body className="text-sm md:text-base mb-8 opacity-70 group-hover:opacity-100 transition-opacity">{pillar.desc}</Body>
+                  <Body className="mb-8 opacity-70 group-hover:opacity-100 transition-opacity">{pillar.desc}</Body>
 
                   {/* Benefits List */}
                   <div className="border-t border-border pt-6 group-hover:border-accent/20 transition-colors">
@@ -342,15 +367,16 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
 
       {/* SECTION 6: PRICING / CTA */}
       <Section id="pricing">
-        <div className="bg-ink border border-border p-8 md:p-20 text-center max-w-5xl mx-auto relative overflow-hidden">
+        <div className="bg-ink border border-border p-8 md:p-20 text-center max-w-4xl mx-auto relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent to-transparent" />
           
+          <Label className="mb-4">The Commitment</Label>
           <H2>One Program. <Accent>Total Reset.</Accent></H2>
           <Lead className="mb-12 max-w-xl mx-auto">
             This is not a PDF workout. This is high-proximity coaching for men who are ready to change their life.
           </Lead>
 
-          <div className="flex flex-col md:flex-row justify-center gap-10 mb-16 text-left max-w-3xl mx-auto">
+          <div className="flex flex-col md:flex-row justify-center gap-8 md:gap-16 mb-16 text-left max-w-3xl mx-auto">
              <ul className="space-y-6">
                <li className="flex items-center gap-4">
                  <CheckCircle className="w-5 h-5 text-accent shrink-0" /> 
@@ -358,7 +384,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
                </li>
                <li className="flex items-center gap-4">
                  <CheckCircle className="w-5 h-5 text-accent shrink-0" /> 
-                 <Body className="text-white">Daily Accountability & Form Review</Body>
+                 <Body className="text-white">Weekly Accountability & Form Review</Body>
                </li>
              </ul>
              <ul className="space-y-6">
@@ -368,16 +394,21 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
                </li>
                <li className="flex items-center gap-4">
                  <CheckCircle className="w-5 h-5 text-accent shrink-0" /> 
-                 <Body className="text-white">Private Brotherhood Community</Body>
+                 <Body className="text-white">Mindset Reframe</Body>
                </li>
              </ul>
           </div>
 
-          <Button size="lg" onClick={onApply} className="w-full md:w-auto px-16">
-            Apply For Coaching
-          </Button>
-          <div className="mt-8">
-            <Body className="text-sm font-mono opacity-60">InshAllah only limited spots for {new Date().toLocaleString('default', { month: 'long' })}</Body>
+          <div className="text-center">
+             <p className="text-accent font-mono uppercase tracking-widest text-xs mb-6 animate-pulse">
+                limited spots available
+             </p>
+             <Button onClick={onApply} size="lg" className="w-full md:w-auto min-w-[300px]">
+                Apply For Coaching
+             </Button>
+             <p className="mt-6 text-xs text-muted max-w-md mx-auto">
+                Application required. We only work with men who are 100% committed.
+             </p>
           </div>
         </div>
       </Section>

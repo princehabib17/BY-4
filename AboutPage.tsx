@@ -74,14 +74,14 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onApply }) => {
 
         {/* DESKTOP LAYOUT: Sticky Split Screen */}
         <div className="hidden lg:block relative border-b border-border">
-           <div className="container mx-auto max-w-7xl grid grid-cols-2 gap-16 px-8">
+           <div className="container mx-auto max-w-7xl grid grid-cols-2 gap-16 px-8 items-start">
               {/* Sticky Left Side (Images) */}
-              <div className="sticky top-24 h-[calc(100vh-6rem)] w-full py-12">
+              <div className="sticky top-0 h-screen w-full pt-24 pb-12 self-start">
                  <div className="relative w-full h-full rounded-sm overflow-hidden border-2 border-border bg-ink shadow-2xl">
                     {CHAPTERS.map((chapter, index) => (
                        <div 
                          key={chapter.id}
-                         className={`absolute inset-0 transition-all duration-700 ease-in-out transform ${
+                         className={`absolute inset-0 transition-all duration-700 ease-in-out transform bg-neutral-900 ${
                            activeChapter === index ? 'opacity-100 scale-100' : 
                            'opacity-0 scale-110'
                          }`}
@@ -90,13 +90,11 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onApply }) => {
                           <img 
                             src={chapter.image} 
                             alt={chapter.title} 
-                            className={`w-full h-full object-cover transition-all duration-1000 ${index === 0 ? 'grayscale contrast-125' : ''}`} 
+                            className={`w-full h-full object-cover object-top transition-all duration-1000 ${index === 0 ? 'grayscale contrast-125' : ''}`} 
                           />
-                          {/* Overlay Gradient */}
-                          <div className={`absolute inset-0 bg-gradient-to-t ${chapter.color} opacity-90`} />
                           
                           {/* Floating Badge */}
-                          <div className="absolute top-8 left-8 bg-black/80 backdrop-blur border border-white/10 px-4 py-3 flex items-center gap-3 shadow-xl">
+                          <div className="absolute top-8 left-8 bg-black/80 backdrop-blur border border-white/10 px-4 py-3 flex items-center gap-3 shadow-xl z-10">
                              <chapter.icon className="w-5 h-5 text-accent" />
                              <span className="font-mono text-xs uppercase tracking-widest text-white">{chapter.subtitle}</span>
                           </div>
@@ -104,7 +102,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onApply }) => {
                     ))}
                     
                     {/* Progress Indicator */}
-                    <div className="absolute bottom-8 left-8 flex gap-2">
+                    <div className="absolute bottom-8 left-8 flex gap-2 z-10">
                        {CHAPTERS.map((_, i) => (
                          <div key={i} className={`h-1 transition-all duration-300 ${activeChapter === i ? 'w-12 bg-accent' : 'w-4 bg-white/20'}`} />
                        ))}
@@ -148,11 +146,11 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onApply }) => {
            {CHAPTERS.map((chapter, index) => (
               <div key={chapter.id} className="relative h-screen sticky top-0 flex items-end border-b-4 border-black">
                  {/* Background Image */}
-                 <div className="absolute inset-0 z-0">
+                 <div className="absolute inset-0 z-0 bg-neutral-900">
                     <img 
                       src={chapter.image} 
                       alt={chapter.title} 
-                      className={`w-full h-full object-cover object-center ${index === 0 ? 'grayscale contrast-125' : ''}`} 
+                      className={`w-full h-full object-cover object-top ${index === 0 ? 'grayscale contrast-125' : ''}`} 
                     />
                     {/* Aggressive Gradient for readability */}
                     <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/80 to-transparent opacity-100" />

@@ -11,7 +11,7 @@ const App: React.FC = () => {
   const closeModal = () => setIsModalOpen(false);
 
   return (
-    <div className="min-h-screen bg-bg text-text overflow-x-hidden selection:bg-accent selection:text-white">
+    <div className="min-h-screen bg-bg text-text selection:bg-accent selection:text-white">
       <NavBar onApply={openModal} />
       
       <HomePage onApply={openModal} />
