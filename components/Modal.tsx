@@ -37,10 +37,17 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
+      const onKey = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') onClose();
+      };
+      window.addEventListener('keydown', onKey);
+      return () => {
+        document.body.style.overflow = 'unset';
+        window.removeEventListener('keydown', onKey);
+      };
     }
-  }, [isOpen]);
+    document.body.style.overflow = 'unset';
+  }, [isOpen, onClose]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -118,7 +125,7 @@ Sent from Barakah Body Website
           <>
             <div className="mb-8">
               <H3 className="mb-2">Enter The <span className="text-accent">Barakah Era</span></H3>
-              <p className="text-muted text-sm">Fill this out. It will open your email client to send the application directly to me.</p>
+              <p className="text-muted text-sm">This opens your mail app with the application filled in. Hit send.</p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-5">

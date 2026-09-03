@@ -24,25 +24,23 @@ export const NavBar: React.FC<NavBarProps> = ({ onApply }) => {
       }`}
     >
       <div className="container mx-auto px-4 md:px-8 max-w-[1200px] flex justify-between items-center">
-        {/* Logo */}
-        <a href="#" className="flex items-center group">
-          <img 
-            src={IMAGES.logoWhite} 
-            alt="Brother Yusuf Fit" 
-            className="h-8 md:h-10 w-auto object-contain transition-transform group-hover:scale-105" 
+        <a href="#intro" className="flex items-center group">
+          <img
+            src={IMAGES.logoWhite}
+            alt="Brother Yusuf Fit"
+            className="h-8 md:h-10 w-auto object-contain mix-blend-screen"
           />
         </a>
 
-        {/* Sticky CTA - No Menu */}
-        <div className="flex items-center gap-4">
-          <Button 
-            onClick={onApply} 
-            size="md"
-            variant="primary"
-          >
-            Apply Now
-          </Button>
+        <div className="hidden md:flex items-center gap-7 font-mono text-[10px] uppercase tracking-[0.22em] text-muted">
+          <a href="#about" className="hover:text-white transition-colors">Origin</a>
+          <a href="#method" className="hover:text-white transition-colors">Method</a>
+          <a href="#proof" className="hover:text-white transition-colors">Proof</a>
         </div>
+
+        <Button onClick={onApply} size="md" variant="primary">
+          Apply Now
+        </Button>
       </div>
     </nav>
   );
