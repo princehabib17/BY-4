@@ -6,7 +6,7 @@ interface TextProps {
 }
 
 export const Display: React.FC<TextProps> = ({ children, className = '' }) => (
-  <h1 className={`font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[8rem] 2xl:text-[10rem] font-bold uppercase tracking-tighter leading-[0.9] ${className}`}>
+  <h1 className={`font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[8.5rem] 2xl:text-[10rem] font-extrabold uppercase tracking-[-0.04em] leading-[0.82] ${className}`}>
     {children}
   </h1>
 );
