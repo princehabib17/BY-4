@@ -74,10 +74,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
            <img
              src={cld(IMAGES.hero, 2200)}
              alt="Brother Yusuf Fit"
-             className="w-full h-full object-cover object-[72%_18%] md:object-[80%_14%]"
+             className="w-full h-full object-cover object-[60%_22%] md:object-[78%_28%] brightness-125 contrast-110"
            />
-           <div className="absolute inset-0 bg-gradient-to-r from-bg via-bg/70 to-transparent z-10" />
-           <div className="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-bg/30 z-10" />
+           <div className="absolute inset-0 bg-gradient-to-r from-bg/95 via-bg/35 to-transparent z-10" />
+           <div className="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-bg/20 z-10" />
         </div>
 
         <div className="container mx-auto px-4 md:px-8 relative z-20">

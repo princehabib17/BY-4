@@ -56,10 +56,11 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div className={`min-h-screen bg-bg text-text selection:bg-accent selection:text-white ${ready ? 'is-ready' : ''}`}>
+    <div className="min-h-screen bg-bg text-text selection:bg-accent selection:text-white">
       <Grain />
       <Cursor />
       {!ready && <Loader onDone={onLoaded} />}
+      <div className={ready ? 'is-ready' : 'opacity-0 pointer-events-none'}>
       <div className="scroll-progress" style={{ transform: `scaleX(${progress})` }} />
       <SideIndex />
 
@@ -91,6 +92,7 @@ const App: React.FC = () => {
       </footer>
 
       <Modal isOpen={isModalOpen} onClose={closeModal} />
+      </div>
     </div>
   );
 };
