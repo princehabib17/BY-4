@@ -112,6 +112,7 @@ export function initMotion() {
         tl.to(dots[i], { backgroundColor: '#e50914', width: 56, duration: 0.3 }, '<');
       }
     });
+    tl.to({}, { duration: 0.45 });
   }
 
   document.querySelectorAll('[data-reveal]').forEach((el) => {
