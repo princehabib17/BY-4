@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from './components/Button';
-import { Display, H2, H3, Lead, Body, Accent } from './components/Typography';
+import { H2, H3, Lead, Body, Accent } from './components/Typography';
 import { IMAGES, PILLARS, TRANSFORMATIONS, CASE_STUDY, cld } from './constants';
 import { CheckCircle, Activity, Target, Clock, ArrowRight } from 'lucide-react';
 import { MacroCalculator } from './components/MacroCalculator';
@@ -48,13 +48,13 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
     <main>
       {/* HERO — type left, unobstructed photo right, type overlaps the frame */}
       <section id="intro" className="relative min-h-[100svh] bg-bg overflow-hidden">
-        <div className="hero-media relative h-[56vh] min-h-[280px] lg:absolute lg:inset-y-0 lg:left-[38%] lg:right-0 lg:h-auto lg:min-h-0">
+        <div className="hero-media relative h-[42vh] min-h-[240px] lg:absolute lg:inset-y-0 lg:left-[40%] lg:right-0 lg:h-auto lg:min-h-0">
           <img
             src={cld(IMAGES.hero, 2400)}
             alt="Brother Yusuf Fit"
             className="absolute inset-0 w-full h-[120%] object-cover object-[78%_28%] lg:object-[72%_22%]"
           />
-          <div className="absolute bottom-4 left-4 right-4 lg:bottom-8 lg:left-8 flex justify-between items-end pointer-events-none">
+          <div className="absolute bottom-16 left-4 right-4 lg:bottom-20 lg:left-8 flex justify-between items-end pointer-events-none">
             <p className="font-mono text-[10px] tracking-[0.28em] uppercase text-white/80">
               Brother Yusuf Fit — Coach
             </p>
@@ -64,39 +64,37 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
           </div>
         </div>
 
-        <div className="relative z-20 lg:absolute lg:inset-y-0 lg:left-0 lg:w-[46%] flex flex-col justify-end px-6 md:px-12 lg:px-14 xl:px-16 pt-10 pb-12 lg:pt-28 lg:pb-20 bg-bg lg:bg-transparent">
-          <div className="lg:bg-bg/90 lg:backdrop-blur-[2px] lg:-mr-16 lg:pr-16 lg:py-8">
-            <p className="font-mono text-[10px] tracking-[0.32em] uppercase text-accent mb-6 hero-fade d1">
-              01 — Intro
-            </p>
-            <Display className="mb-8 text-[2.6rem] sm:text-6xl md:text-7xl lg:text-[4.4rem] xl:text-[5.6rem] 2xl:text-[6.4rem] leading-[0.84]">
-              <span className="hero-line"><span>You’re winning</span></span>
-              <span className="hero-line"><span>on paper but</span></span>
-              <span className="hero-line"><span><Accent>failing your body</Accent></span></span>
-              <span className="hero-line"><span>and health.</span></span>
-            </Display>
-            <Lead className="mb-10 text-white/90 font-medium max-w-md hero-fade d2">
-              Build real strength, master your nafs and lose 20–50lbs through The Barakah Body Framework, inshallah.
-            </Lead>
-            <div className="flex flex-wrap gap-4 hero-fade d3">
-              <Button onClick={onApply} size="lg" withIcon>
-                Enter the barakah era
-              </Button>
-            </div>
+        <div className="relative z-20 lg:absolute lg:inset-y-0 lg:left-0 lg:w-[48%] flex flex-col justify-center px-6 md:px-12 lg:px-14 xl:px-16 pt-8 pb-24 lg:pt-24 lg:pb-28 bg-bg lg:bg-gradient-to-r lg:from-bg lg:via-bg/95 lg:to-transparent">
+          <p className="font-mono text-[10px] tracking-[0.32em] uppercase text-accent mb-5 hero-fade d1">
+            01 — Intro
+          </p>
+          <h1 className="font-display font-extrabold uppercase tracking-[-0.04em] leading-[0.86] mb-6 text-[2.35rem] sm:text-5xl md:text-6xl lg:text-[3.6rem] xl:text-[4.25rem]">
+            <span className="hero-line"><span>You’re winning</span></span>
+            <span className="hero-line"><span>on paper but</span></span>
+            <span className="hero-line"><span><Accent>failing your body</Accent></span></span>
+            <span className="hero-line"><span>and health.</span></span>
+          </h1>
+          <Lead className="mb-8 text-white/90 font-medium max-w-md text-base md:text-lg lg:text-xl hero-fade d2">
+            Build real strength, master your nafs and lose 20–50lbs through The Barakah Body Framework, inshallah.
+          </Lead>
+          <div className="flex flex-wrap gap-4 hero-fade d3">
+            <Button onClick={onApply} size="lg" withIcon>
+              Enter the barakah era
+            </Button>
+          </div>
+        </div>
+
+        <div className="ticker absolute bottom-0 left-0 right-0 z-30" aria-hidden="true">
+          <div className="ticker-track">
+            {[...TICKER, ...TICKER, ...TICKER].map((item, i) => (
+              <span key={i}>
+                {item}
+                <i />
+              </span>
+            ))}
           </div>
         </div>
       </section>
-
-      <div className="ticker" aria-hidden="true">
-        <div className="ticker-track">
-          {[...TICKER, ...TICKER, ...TICKER].map((item, i) => (
-            <span key={i}>
-              {item}
-              <i />
-            </span>
-          ))}
-        </div>
-      </div>
 
       {/* PROOF — paper magazine spread. Impossible to miss vs the black site. */}
       <section id="proof" className="paper-section relative overflow-hidden">
@@ -190,7 +188,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
       {/* ORIGIN — pinned split film, photos wipe on the right */}
       <section id="about" className="origin-pin bg-bg">
         <div className="origin-stage h-[100svh] grid grid-rows-[1fr_minmax(42vh,auto)] lg:grid-rows-none lg:grid-cols-[minmax(280px,38%)_1fr] overflow-hidden">
-          <div className="relative z-20 order-2 lg:order-1 flex flex-col justify-end px-6 md:px-12 lg:px-14 py-10 lg:py-20 bg-bg border-t lg:border-t-0 lg:border-r border-border min-h-[42vh]">
+          <div className="relative z-20 order-2 lg:order-1 flex flex-col justify-end px-6 md:px-12 lg:px-14 py-10 lg:py-20 bg-bg border-t lg:border-t-0 lg:border-r border-border min-h-[42vh] overflow-hidden">
             <p className="font-mono text-[10px] tracking-[0.32em] uppercase text-accent mb-6 lg:mb-8">04 — Origin</p>
             {CHAPTERS.map((chapter, index) => (
               <div
@@ -199,11 +197,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
                 data-origin-copy={index}
                 style={{ opacity: index === 0 ? 1 : 0, pointerEvents: index === 0 ? 'auto' : 'none' }}
               >
-                <p className="font-display text-[22vw] lg:text-[8.5rem] leading-[0.75] text-white/[0.07] select-none mb-4">
+                <p className="font-display text-7xl lg:text-8xl leading-[0.75] text-white/[0.08] select-none mb-3">
                   0{index + 1}
                 </p>
-                <H2 className="text-white mb-5">{chapter.title}</H2>
-                <Lead className="text-white/85 max-w-md mb-8">{chapter.text}</Lead>
+                <H2 className="text-white mb-4 text-3xl md:text-4xl lg:text-5xl">{chapter.title}</H2>
+                <Lead className="text-white/85 max-w-md mb-6 text-base md:text-lg">{chapter.text}</Lead>
                 {index === CHAPTERS.length - 1 && (
                   <Button onClick={onApply} size="lg" withIcon>Apply Now</Button>
                 )}

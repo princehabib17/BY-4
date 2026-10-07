@@ -72,8 +72,8 @@ export function initMotion() {
     });
     copies.forEach((el, i) => {
       gsap.set(el, {
-        opacity: i === 0 ? 1 : 0,
-        y: i === 0 ? 0 : 36,
+        autoAlpha: i === 0 ? 1 : 0,
+        y: i === 0 ? 0 : 28,
         pointerEvents: i === 0 ? 'auto' : 'none',
       });
     });
@@ -94,16 +94,16 @@ export function initMotion() {
 
     stills.forEach((el, i) => {
       if (i === 0) return;
-      tl.to(el, { clipPath: 'inset(0 0 0 0%)', duration: 1.15, ease: 'none' });
+      tl.to(el, { clipPath: 'inset(0 0 0 0%)', duration: 1.2, ease: 'none' });
       tl.to(
         copies[i - 1],
-        { opacity: 0, y: -28, pointerEvents: 'none', duration: 0.35, ease: 'none' },
+        { autoAlpha: 0, y: -18, pointerEvents: 'none', duration: 0.22, ease: 'none' },
         '<'
       );
       tl.to(
         copies[i],
-        { opacity: 1, y: 0, pointerEvents: 'auto', duration: 0.45, ease: 'none' },
-        '<0.08'
+        { autoAlpha: 1, y: 0, pointerEvents: 'auto', duration: 0.28, ease: 'none' },
+        '>'
       );
       if (dots[i - 1]) {
         tl.to(dots[i - 1], { backgroundColor: 'rgba(255,255,255,0.2)', width: 40, duration: 0.3 }, '<');
