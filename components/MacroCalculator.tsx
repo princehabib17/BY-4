@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
-import { Flame, Target, Dumbbell, Zap, Check } from 'lucide-react';
-import { H2, Label, Body } from './Typography';
+import { Flame, Target, Dumbbell, Zap, Check, Lock } from 'lucide-react';
+import { Button } from './Button';
+import { H2, H3, Label, Body } from './Typography';
 import { Reveal } from './Reveal';
 
 interface MacroForm {
@@ -36,7 +37,7 @@ const Slider: React.FC<SliderProps> = ({ label, value, onChange, min, max, unit 
         {value}<span className="text-accent text-sm ml-1 font-mono">{unit}</span>
       </div>
     </div>
-    
+
     <div className="relative h-6 flex items-center group">
       <input
         type="range"
@@ -46,16 +47,13 @@ const Slider: React.FC<SliderProps> = ({ label, value, onChange, min, max, unit 
         onChange={(e) => onChange(parseInt(e.target.value))}
         className="absolute inset-0 w-full opacity-0 cursor-pointer z-20"
       />
-      {/* Track */}
       <div className="w-full h-1 bg-ink2 border border-border relative">
-         {/* Fill */}
-         <div 
+         <div
             className="absolute left-0 top-0 bottom-0 bg-accent transition-all duration-100"
             style={{ width: `${((value - min) / (max - min)) * 100}%` }}
          />
       </div>
-      {/* Thumb */}
-      <div 
+      <div
         className="absolute h-4 w-4 bg-white border-2 border-accent z-10 pointer-events-none transition-all duration-100 group-hover:scale-125"
         style={{ left: `calc(${((value - min) / (max - min)) * 100}% - 8px)` }}
       />
@@ -72,6 +70,10 @@ export const MacroCalculator: React.FC = () => {
     weight: 80,
     activityIndex: 1
   });
+
+  const [email, setEmail] = useState('');
+  const [showGate, setShowGate] = useState(false);
+  const [unlocked, setUnlocked] = useState(false);
 
   const result: MacroResult = useMemo(() => {
     const goalMults: Record<string, number> = { cut: 0.80, maintain: 1.0, bulk: 1.10 };
@@ -98,22 +100,47 @@ export const MacroCalculator: React.FC = () => {
     };
   }, [form]);
 
+  const handleUnlock = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+
+    const subject = "Macro Calculator Lead";
+    const body = `
+NEW MACRO LEAD:
+---------------
+Email: ${email}
+Goal: ${form.goal}
+Gender: ${form.gender}
+Stats: ${form.age}yo, ${form.height}cm, ${form.weight}kg
+Activity Level: ${form.activityIndex}
+
+CALCULATED RESULTS:
+Calories: ${result.calories}
+Protein: ${result.protein.g}g
+Fat: ${result.fat.g}g
+Carbs: ${result.carbs.g}g
+---------------
+    `.trim();
+
+    window.location.href = `mailto:brotheryusuf.fit@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    setUnlocked(true);
+    setShowGate(false);
+  };
+
   return (
     <section id="calc" className="py-24 bg-ink border-t border-border relative overflow-hidden">
       <div className="container mx-auto px-4 md:px-8 max-w-6xl relative z-10">
-        
+
         <Reveal className="text-center mb-16">
           <Label className="mb-4 block">Precision Nutrition</Label>
           <H2>Macro <span className="text-accent">Calculator</span></H2>
-          <Body className="max-w-xl mx-auto">Numbers move as you move. No gate. No blur.</Body>
+          <Body className="max-w-xl mx-auto">Enter your email to unlock your split.</Body>
         </Reveal>
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
-          
-           {/* FORM SIDE */}
+
            <div className="space-y-10">
-              
-              {/* GOAL */}
+
               <div>
                 <Label className="mb-4 block">1. Select Goal</Label>
                 <div className="grid grid-cols-3 gap-2">
@@ -138,7 +165,6 @@ export const MacroCalculator: React.FC = () => {
                 </div>
               </div>
 
-              {/* GENDER */}
               <div>
                  <Label className="mb-4 block">2. Gender</Label>
                  <div className="flex border border-border">
@@ -147,8 +173,8 @@ export const MacroCalculator: React.FC = () => {
                          key={g}
                          onClick={() => setForm({...form, gender: g})}
                          className={`flex-1 py-3 font-display uppercase text-sm tracking-wider transition-all ${
-                            form.gender === g 
-                             ? 'bg-white text-black' 
+                            form.gender === g
+                             ? 'bg-white text-black'
                              : 'bg-bg text-muted hover:text-white'
                          }`}
                        >
@@ -158,9 +184,8 @@ export const MacroCalculator: React.FC = () => {
                  </div>
               </div>
 
-              {/* STATS SLIDERS */}
               <div className="space-y-6 bg-bg p-6 border border-border">
-                 <Slider 
+                 <Slider
                   label="Age"
                   value={form.age}
                   onChange={(v) => setForm({...form, age: v})}
@@ -168,7 +193,7 @@ export const MacroCalculator: React.FC = () => {
                   max={80}
                   unit="yr"
                 />
-                <Slider 
+                <Slider
                   label="Height"
                   value={form.height}
                   onChange={(v) => setForm({...form, height: v})}
@@ -176,7 +201,7 @@ export const MacroCalculator: React.FC = () => {
                   max={220}
                   unit="cm"
                 />
-                <Slider 
+                <Slider
                   label="Weight"
                   value={form.weight}
                   onChange={(v) => setForm({...form, weight: v})}
@@ -186,7 +211,6 @@ export const MacroCalculator: React.FC = () => {
                 />
               </div>
 
-              {/* ACTIVITY */}
               <div>
                 <Label className="mb-4 block">3. Activity Level</Label>
                 <div className="space-y-2">
@@ -217,15 +241,44 @@ export const MacroCalculator: React.FC = () => {
                 </div>
               </div>
 
+              {!unlocked && (
+                <Button onClick={() => setShowGate(true)} className="w-full" size="lg" withIcon>
+                  Unlock Macros
+                </Button>
+              )}
            </div>
 
            <div className="relative lg:sticky lg:top-24 self-start">
-              <div className="h-full border border-border bg-bg p-8 flex flex-col justify-center">
+              {showGate && !unlocked && (
+                  <div className="absolute inset-0 z-20 flex items-start justify-center pt-16 bg-ink/90 backdrop-blur-sm">
+                      <div className="bg-bg border border-border p-8 w-full max-w-md shadow-2xl relative">
+                          <div className="absolute top-0 left-0 w-full h-1 bg-accent" />
+                          <div className="text-center mb-6">
+                             <Lock className="w-8 h-8 text-accent mx-auto mb-4" />
+                             <H3>Unlock Results</H3>
+                             <Body className="text-sm">Email unlocks your split. It opens a mail draft to me.</Body>
+                          </div>
+                          <form onSubmit={handleUnlock} className="space-y-4">
+                              <input
+                                 type="email"
+                                 required
+                                 placeholder="EMAIL ADDRESS"
+                                 value={email}
+                                 onChange={(e) => setEmail(e.target.value)}
+                                 className="w-full bg-ink border border-border px-4 py-3 text-text focus:border-accent focus:ring-1 focus:ring-accent outline-none font-sans placeholder:text-neutral-700"
+                              />
+                              <Button type="submit" className="w-full">Reveal</Button>
+                          </form>
+                      </div>
+                  </div>
+              )}
+
+              <div className={`h-full border border-border bg-bg p-8 flex flex-col justify-center ${!unlocked ? 'blur-sm opacity-50 pointer-events-none select-none' : ''}`}>
                     <div>
                        <div className="text-center mb-10 pb-10 border-b border-border">
                           <Label className="mb-2 block">Daily Target</Label>
                           <div className="font-display text-8xl font-bold text-white leading-none tabular-nums">
-                             {result.calories}
+                             {unlocked ? result.calories : '— — —'}
                           </div>
                           <div className="font-mono text-accent text-xl mt-2">KCAL</div>
                        </div>
@@ -243,14 +296,14 @@ export const MacroCalculator: React.FC = () => {
                                       <span className="font-display uppercase text-xl">{m.label}</span>
                                    </div>
                                    <div className="text-right">
-                                      <span className="font-display text-2xl tabular-nums">{m.val.g}g</span>
-                                      <span className="font-mono text-muted text-xs ml-2">({m.val.pct}%)</span>
+                                      <span className="font-display text-2xl tabular-nums">{unlocked ? `${m.val.g}g` : '— g'}</span>
+                                      <span className="font-mono text-muted text-xs ml-2">({unlocked ? `${m.val.pct}%` : '—'})</span>
                                    </div>
                                 </div>
                                 <div className="h-px w-full bg-ink2 relative overflow-hidden">
                                    <i
                                       className="absolute top-0 left-0 bottom-0 h-full bg-accent"
-                                      style={{ width: `${m.val.pct}%` }}
+                                      style={{ width: unlocked ? `${m.val.pct}%` : '0%' }}
                                    />
                                 </div>
                              </div>
@@ -259,7 +312,7 @@ export const MacroCalculator: React.FC = () => {
 
                        <div className="mt-10 pt-6 border-t border-border text-center">
                           <p className="font-mono text-[10px] text-muted uppercase tracking-widest">
-                             Mifflin-St Jeor · live
+                             Mifflin-St Jeor · {unlocked ? 'unlocked' : 'locked'}
                           </p>
                        </div>
                     </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import { Button } from './components/Button';
 import { Section } from './components/Section';
 import { Display, H2, H3, Lead, Body, Accent, Label } from './components/Typography';
@@ -43,29 +43,6 @@ const CHAPTERS = [
 ];
 
 export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
-  const [activeChapter, setActiveChapter] = useState(0);
-  const observerRefs = useRef<(HTMLDivElement | null)[]>([]);
-
-  useEffect(() => {
-    const observers = observerRefs.current.map((ref, index) => {
-      if (!ref) return null;
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setActiveChapter(index);
-          }
-        },
-        { threshold: 0.5, rootMargin: "-20% 0px -20% 0px" } 
-      );
-      observer.observe(ref);
-      return observer;
-    });
-
-    return () => {
-      observers.forEach(obs => obs?.disconnect());
-    };
-  }, []);
-
   return (
     <main>
       {/* SECTION 1: HERO */}
@@ -74,10 +51,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
            <img
              src={cld(IMAGES.hero, 2200)}
              alt="Brother Yusuf Fit"
-             className="w-full h-full object-cover object-[60%_22%] md:object-[78%_28%] brightness-125 contrast-110"
+             className="w-full h-full object-cover object-[68%_32%] md:object-[82%_38%] brightness-[1.15] contrast-110"
            />
-           <div className="absolute inset-0 bg-gradient-to-r from-bg/95 via-bg/35 to-transparent z-10" />
-           <div className="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-bg/20 z-10" />
+           <div className="absolute inset-0 z-10 bg-gradient-to-r from-bg/80 via-bg/25 to-transparent" />
         </div>
 
         <div className="container mx-auto px-4 md:px-8 relative z-20">
@@ -195,104 +171,52 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
         </div>
       </Section>
 
-      {/* SECTION 4: THE ORIGIN / ABOUT */}
-      <section id="about" className="relative bg-bg pb-32">
-          <div className="py-24 text-center border-b border-border/50 px-4 max-w-4xl mx-auto">
+      {/* SECTION 4: ORIGIN FILM */}
+      <section id="about" className="relative bg-bg">
+          <div className="py-20 md:py-24 text-center px-4 max-w-4xl mx-auto">
               <Label className="mb-4">The Origin Story</Label>
               <H2 className="mb-6">About <Accent>Brother Yusuf</Accent></H2>
               <Lead>I was not always the man you see today. I rebuilt myself from the ground up.</Lead>
           </div>
 
-          <div className="hidden lg:block relative border-b border-border">
-             {/* Sticky container setup with h-screen to ensure full viewport tracking */}
-             <div className="container mx-auto max-w-7xl grid grid-cols-2 gap-16 px-8 items-start">
-                <div className="sticky top-0 h-screen w-full pt-24 pb-12 self-start">
-                   <div className="relative w-full h-full rounded-sm overflow-hidden border-2 border-border bg-ink shadow-2xl">
-                      {CHAPTERS.map((chapter, index) => (
-                         <div 
-                           key={chapter.id}
-                           className={`absolute inset-0 transition-all duration-700 ease-in-out transform bg-neutral-900 ${
-                             activeChapter === index ? 'opacity-100 scale-100' : 
-                             'opacity-0 scale-110'
-                           }`}
-                         >
-                            <img
-                              src={cld(chapter.image, 1400)}
-                              alt={chapter.title}
-                              className={`w-full h-full object-cover object-top transition-all duration-1000 ${index === 0 ? 'grayscale contrast-125' : ''}`}
-                            />
-                            
-                            <div className="absolute top-8 left-8 bg-black/80 backdrop-blur border border-white/10 px-4 py-2 flex items-center gap-3 shadow-xl z-10">
-                               <chapter.icon className="w-4 h-4 text-accent" />
-                               <span className="font-display uppercase text-sm tracking-wider">Chapter 0{chapter.id}</span>
-                            </div>
-                         </div>
-                      ))}
-                      
-                      <div className="absolute bottom-8 left-8 flex gap-2 z-10">
-                         {CHAPTERS.map((_, i) => (
-                           <div key={i} className={`h-1 transition-all duration-300 ${activeChapter === i ? 'w-12 bg-accent' : 'w-4 bg-white/20'}`} />
-                         ))}
-                      </div>
-                   </div>
-                </div>
-
-                <div className="py-12">
-                   {CHAPTERS.map((chapter, index) => (
-                      <div 
-                        key={chapter.id}
-                        ref={el => { observerRefs.current[index] = el }}
-                        className={`min-h-[80vh] flex flex-col justify-center p-8 transition-all duration-700 ${
-                          activeChapter === index 
-                            ? 'opacity-100 translate-x-0' 
-                            : 'opacity-20 translate-x-4 grayscale'
-                        }`}
-                      >
-                         <H2 className="relative z-10">{chapter.title}</H2>
-                         <div className="w-16 h-1 bg-accent mb-10"></div>
-                         <Lead className="text-white font-light mb-8">
-                           {chapter.text}
-                         </Lead>
-                         
-                         {index === CHAPTERS.length - 1 && (
-                            <div className="mt-8">
-                                <Button onClick={onApply} size="lg" withIcon>Apply Now</Button>
-                            </div>
-                         )}
-                      </div>
-                   ))}
-                </div>
-             </div>
-          </div>
-
-          <div className="lg:hidden pb-0">
+          <div className="origin-film">
              {CHAPTERS.map((chapter, index) => (
-                <div key={chapter.id} className="relative h-screen sticky top-0 flex items-end border-b-4 border-black">
+                <article
+                  key={chapter.id}
+                  className="origin-frame relative h-screen sticky top-0 flex items-end overflow-hidden"
+                  style={{ zIndex: index + 1 }}
+                >
                    <div className="absolute inset-0 z-0 bg-neutral-900">
                       <img
-                        src={cld(chapter.image, 1200)}
+                        src={cld(chapter.image, 1800)}
                         alt={chapter.title}
-                        className={`w-full h-full object-cover object-top ${index === 0 ? 'grayscale contrast-125' : ''}`}
+                        className={`w-full h-full object-cover ${
+                          index === 0
+                            ? 'object-[50%_20%] grayscale contrast-125'
+                            : index === 1
+                              ? 'object-center'
+                              : 'object-[50%_15%] saturate-110'
+                        }`}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/80 to-transparent opacity-100" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/70 to-transparent" />
                    </div>
 
-                   <div className="relative z-10 w-full p-6 pb-32 flex flex-col items-start">
-                      <div className="mb-4 text-accent flex items-center gap-2">
-                         <chapter.icon className="w-6 h-6 drop-shadow-lg" />
-                         <span className="font-mono text-xs uppercase tracking-widest text-white/80">Chapter 0{index + 1}</span>
+                   <div className="relative z-10 w-full max-w-4xl px-6 md:px-12 pb-16 md:pb-24">
+                      <div className="mb-4 text-accent flex items-center gap-3">
+                         <chapter.icon className="w-5 h-5" />
+                         <span className="font-mono text-[10px] md:text-xs uppercase tracking-[0.28em] text-white/80">
+                           Chapter 0{index + 1} / 03
+                         </span>
                       </div>
-                      <H2 className="text-white mb-4 drop-shadow-xl">{chapter.title}</H2>
-                      <Body className="text-gray-200 border-l-2 border-accent pl-4 mb-8">
+                      <H2 className="text-white mb-5">{chapter.title}</H2>
+                      <Lead className="text-white/90 max-w-2xl border-l-2 border-accent pl-5 mb-8">
                          {chapter.text}
-                      </Body>
+                      </Lead>
                       {index === CHAPTERS.length - 1 && (
-                            <div className="w-full">
-                                <Button onClick={onApply} size="lg" className="w-full">Apply Now</Button>
-                            </div>
-                         )}
+                        <Button onClick={onApply} size="lg" withIcon>Apply Now</Button>
+                      )}
                    </div>
-                </div>
+                </article>
              ))}
           </div>
       </section>
