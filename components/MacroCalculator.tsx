@@ -155,7 +155,6 @@ Carbs: ${result.carbs.g}g
       <div className="container mx-auto px-4 md:px-8 max-w-6xl relative z-10">
 
         <Reveal className="text-center mb-16">
-          <Label className="mb-4 block">Precision Nutrition</Label>
           <H2>Macro <span className="text-accent">Calculator</span></H2>
           <Body className="max-w-xl mx-auto">Enter your email to unlock your split.</Body>
         </Reveal>

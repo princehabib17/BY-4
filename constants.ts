@@ -2,7 +2,7 @@ import { NavItem, Transformation, ProgramPillar } from './types';
 
 export const cld = (url: string, w = 1600) =>
   url.includes('res.cloudinary.com')
-    ? url.replace('/upload/', `/upload/f_auto,q_auto,dpr_auto,w_${w},c_limit/`)
+    ? url.replace('/upload/', `/upload/f_auto,q_auto:best,dpr_auto,e_sharpen:40,w_${w},c_limit/`)
     : url;
 
 // Using the uploaded images mapped to logical constants

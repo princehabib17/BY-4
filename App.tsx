@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import Lenis from 'lenis';
 import { NavBar } from './components/NavBar';
 import { Modal } from './components/Modal';
 import { HomePage } from './HomePage';
@@ -8,6 +7,7 @@ import { Cursor } from './components/Cursor';
 import { Loader } from './components/Loader';
 import { SideIndex } from './components/SideIndex';
 import { IMAGES } from './constants';
+import { initMotion } from './motion';
 
 const App: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,20 +26,9 @@ const App: React.FC = () => {
   }, [ready]);
 
   useEffect(() => {
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduced) return;
+    if (!ready) return;
 
-    const lenis = new Lenis({
-      lerp: 0.085,
-      smoothWheel: true,
-    });
-
-    let raf = 0;
-    const tick = (time: number) => {
-      lenis.raf(time);
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
+    const killMotion = initMotion();
 
     const onScroll = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
@@ -49,11 +38,10 @@ const App: React.FC = () => {
     onScroll();
 
     return () => {
-      cancelAnimationFrame(raf);
-      lenis.destroy();
+      killMotion();
       window.removeEventListener('scroll', onScroll);
     };
-  }, []);
+  }, [ready]);
 
   return (
     <div className="min-h-screen bg-bg text-text selection:bg-accent selection:text-white">

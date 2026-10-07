@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from './components/Button';
 import { Section } from './components/Section';
 import { Display, H2, H3, Lead, Body, Accent, Label } from './components/Typography';
+
 import { IMAGES, PILLARS, TRANSFORMATIONS, CASE_STUDY, cld } from './constants';
 import { CheckCircle, Activity, Target, Clock, ArrowRight, Moon, Shield } from 'lucide-react';
 import { MacroCalculator } from './components/MacroCalculator';
@@ -51,14 +52,13 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
            <img
              src={cld(IMAGES.hero, 2200)}
              alt="Brother Yusuf Fit"
-             className="w-full h-full object-cover object-[68%_32%] md:object-[82%_38%] brightness-[1.15] contrast-110"
+             className="absolute inset-0 w-full h-[140%] object-cover object-[68%_32%] md:object-[82%_38%] brightness-110 contrast-105"
            />
-           <div className="absolute inset-0 z-10 bg-gradient-to-r from-bg/80 via-bg/25 to-transparent" />
+           <div className="absolute inset-0 z-10 bg-gradient-to-r from-bg/55 via-transparent to-transparent" />
         </div>
 
         <div className="container mx-auto px-4 md:px-8 relative z-20">
           <div className="max-w-5xl">
-            <Label className="mb-5 text-accent hero-fade d1">Elite Coaching for Muslim Men</Label>
             <Display className="mb-8 max-w-6xl">
               <span className="hero-line"><span>You’re winning</span></span>
               <span className="hero-line"><span>on paper but</span></span>
@@ -87,7 +87,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
       <Section id="proof" darker className="border-t border-border overflow-hidden">
         <div className="max-w-6xl mx-auto">
           <Reveal className="text-center mb-16">
-            <Label className="mb-4">Real Results</Label>
             <H2>Client <Accent>Transformation</Accent></H2>
             <Lead className="max-w-2xl mx-auto">Successful in career, providing for family, but losing the battle internally. Drag the line.</Lead>
           </Reveal>
@@ -104,7 +103,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
 
           <div className="grid md:grid-cols-2 gap-12 md:gap-20 mt-16 max-w-4xl mx-auto">
             <Reveal>
-              <Label className="mb-2 text-muted">The Beginning</Label>
               <H3 className="text-white mb-6">Day 01: The Fog</H3>
               <ul className="space-y-5">
                 {CASE_STUDY.beforePoints.map((point, i) => (
@@ -115,8 +113,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
                 ))}
               </ul>
             </Reveal>
-            <Reveal delay={120}>
-              <Label className="mb-2 text-accent">The Outcome</Label>
+            <Reveal>
               <H3 className="text-white mb-6">Week 12: The Result</H3>
               <ul className="space-y-5 border-l-2 border-accent pl-6">
                 {CASE_STUDY.afterPoints.map((point, i) => (
@@ -135,7 +132,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
       <Section id="stories">
         <div className="container mx-auto max-w-6xl">
           <Reveal className="text-center mb-16">
-             <Label className="mb-4">Proof of Work</Label>
              <H2>More <Accent>Stories</Accent></H2>
           </Reveal>
           <div className="grid md:grid-cols-2 gap-8 md:gap-12">
@@ -173,8 +169,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
 
       {/* SECTION 4: ORIGIN FILM */}
       <section id="about" className="relative bg-bg">
-          <div className="py-20 md:py-24 text-center px-4 max-w-4xl mx-auto">
-              <Label className="mb-4">The Origin Story</Label>
+          <div className="py-20 md:py-24 text-center px-4 max-w-4xl mx-auto" data-reveal>
               <H2 className="mb-6">About <Accent>Brother Yusuf</Accent></H2>
               <Lead>I was not always the man you see today. I rebuilt myself from the ground up.</Lead>
           </div>
@@ -188,20 +183,20 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
                 >
                    <div className="absolute inset-0 z-0 bg-neutral-900">
                       <img
-                        src={cld(chapter.image, 1800)}
+                        src={cld(chapter.image, 2000)}
                         alt={chapter.title}
-                        className={`w-full h-full object-cover ${
+                        className={`absolute inset-0 w-full h-[140%] object-cover will-change-transform ${
                           index === 0
-                            ? 'object-[50%_20%] grayscale contrast-125'
+                            ? 'object-[50%_20%] grayscale contrast-110'
                             : index === 1
                               ? 'object-center'
-                              : 'object-[50%_15%] saturate-110'
+                              : 'object-[50%_15%]'
                         }`}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/70 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-bg/90 via-bg/25 to-transparent" />
                    </div>
 
-                   <div className="relative z-10 w-full max-w-4xl px-6 md:px-12 pb-16 md:pb-24">
+                   <div className="origin-copy relative z-10 w-full max-w-4xl px-6 md:px-12 pb-16 md:pb-24">
                       <div className="mb-4 text-accent flex items-center gap-3">
                          <chapter.icon className="w-5 h-5" />
                          <span className="font-mono text-[10px] md:text-xs uppercase tracking-[0.28em] text-white/80">
@@ -224,7 +219,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
       {/* SECTION 5: THE FRAMEWORK */}
       <Section id="method">
         <Reveal className="text-center max-w-3xl mx-auto mb-20">
-          <Label className="mb-4">The Methodology</Label>
           <H2>The <Accent>Barakah Body</Accent> Framework</H2>
           <Lead>
             Proven system that has helped Muslim men transform their bodies while building discipline that carries into every area of life.
@@ -284,7 +278,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
         <div className="bg-ink border border-border p-8 md:p-20 text-center max-w-4xl mx-auto relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent to-transparent" />
           
-          <Label className="mb-4">The Commitment</Label>
           <H2>One Program. <Accent>Total Reset.</Accent></H2>
           <Lead className="mb-12 max-w-xl mx-auto">
             This is not a PDF workout. This is high-proximity coaching for men who are ready to change their life.
@@ -314,9 +307,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
           </div>
 
           <div className="text-center">
-             <p className="text-accent font-mono uppercase tracking-widest text-xs mb-6">
-                limited spots available
-             </p>
              <Button onClick={onApply} size="lg" className="w-full md:w-auto min-w-[300px]">
                 Apply For Coaching
              </Button>
