@@ -196,71 +196,20 @@ html.has-cursor * {
 }
 
 /* Hero */
-.hero-media {
-  clip-path: inset(0 0 0 100%);
-}
-
 .hero-media img {
+  height: 130%;
+  width: 100%;
+  object-fit: cover;
   will-change: transform;
 }
 
-.origin-stage {
-  will-change: transform;
+.is-ready .hero-media img {
+  animation: heroZoom 18s ease-out forwards;
 }
 
-.origin-still {
-  will-change: clip-path;
-}
-
-.origin-copy:not(:first-of-type) {
-  pointer-events: none;
-}
-
-/* Paper magazine section — the unmissable break from all-black */
-.paper-section {
-  background: #e4dccb;
-  color: #12110f;
-}
-
-.paper-section .compare {
-  background: #cfc6b4;
-}
-
-/* Infinite news ticker */
-.ticker {
-  overflow: hidden;
-  border-block: 1px solid var(--border);
-  background: #0a0a0a;
-  padding: 0.85rem 0;
-}
-
-.ticker-track {
-  display: flex;
-  align-items: center;
-  width: max-content;
-  will-change: transform;
-}
-
-.ticker-track span {
-  display: inline-flex;
-  align-items: center;
-  gap: 2.4rem;
-  padding-right: 2.4rem;
-  font-family: "Big Shoulders Display", sans-serif;
-  font-weight: 800;
-  font-size: clamp(1.4rem, 3.2vw, 2.4rem);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #f2eee8;
-  white-space: nowrap;
-}
-
-.ticker-track i {
-  display: inline-block;
-  width: 0.55rem;
-  height: 0.55rem;
-  background: var(--accent);
-  border-radius: 50%;
+@keyframes heroZoom {
+  from { transform: scale(1.16); }
+  to { transform: scale(1.02); }
 }
 
 .hero-line {
@@ -495,7 +444,6 @@ html.has-cursor * {
 @media (prefers-reduced-motion: reduce) {
   .loader-mark span,
   .loader-bar > i,
-  .hero-media,
   .hero-media img,
   .hero-line > span,
   .hero-fade,
@@ -506,7 +454,6 @@ html.has-cursor * {
     transform: none !important;
     opacity: 1 !important;
     filter: none !important;
-    clip-path: none !important;
   }
 
   .loader-bar > i { width: 100%; }
