@@ -183,7 +183,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onApply }) => {
              {CHAPTERS.map((chapter, index) => (
                 <article
                   key={chapter.id}
-                  className="origin-frame relative h-screen sticky top-0 flex items-end overflow-hidden"
+                  className="origin-frame relative h-screen sticky top-0 flex items-end overflow-hidden bg-bg"
                   style={{ zIndex: index + 1 }}
                 >
                    <div className="absolute inset-0 z-0 bg-neutral-900">

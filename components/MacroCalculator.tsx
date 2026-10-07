@@ -129,6 +129,29 @@ Carbs: ${result.carbs.g}g
 
   return (
     <section id="calc" className="py-24 bg-ink border-t border-border relative overflow-hidden">
+      {showGate && !unlocked && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center px-4 bg-ink/90 backdrop-blur-sm">
+          <div className="bg-bg border border-border p-8 w-full max-w-md shadow-2xl relative">
+            <div className="absolute top-0 left-0 w-full h-1 bg-accent" />
+            <div className="text-center mb-6">
+              <Lock className="w-8 h-8 text-accent mx-auto mb-4" />
+              <H3>Unlock Results</H3>
+              <Body className="text-sm">Email unlocks your split. It opens a mail draft to me.</Body>
+            </div>
+            <form onSubmit={handleUnlock} className="space-y-4">
+              <input
+                type="email"
+                required
+                placeholder="EMAIL ADDRESS"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full bg-ink border border-border px-4 py-3 text-text focus:border-accent focus:ring-1 focus:ring-accent outline-none font-sans placeholder:text-neutral-700"
+              />
+              <Button type="submit" className="w-full">Reveal</Button>
+            </form>
+          </div>
+        </div>
+      )}
       <div className="container mx-auto px-4 md:px-8 max-w-6xl relative z-10">
 
         <Reveal className="text-center mb-16">
@@ -249,30 +272,6 @@ Carbs: ${result.carbs.g}g
            </div>
 
            <div className="relative lg:sticky lg:top-24 self-start">
-              {showGate && !unlocked && (
-                  <div className="absolute inset-0 z-20 flex items-start justify-center pt-16 bg-ink/90 backdrop-blur-sm">
-                      <div className="bg-bg border border-border p-8 w-full max-w-md shadow-2xl relative">
-                          <div className="absolute top-0 left-0 w-full h-1 bg-accent" />
-                          <div className="text-center mb-6">
-                             <Lock className="w-8 h-8 text-accent mx-auto mb-4" />
-                             <H3>Unlock Results</H3>
-                             <Body className="text-sm">Email unlocks your split. It opens a mail draft to me.</Body>
-                          </div>
-                          <form onSubmit={handleUnlock} className="space-y-4">
-                              <input
-                                 type="email"
-                                 required
-                                 placeholder="EMAIL ADDRESS"
-                                 value={email}
-                                 onChange={(e) => setEmail(e.target.value)}
-                                 className="w-full bg-ink border border-border px-4 py-3 text-text focus:border-accent focus:ring-1 focus:ring-accent outline-none font-sans placeholder:text-neutral-700"
-                              />
-                              <Button type="submit" className="w-full">Reveal</Button>
-                          </form>
-                      </div>
-                  </div>
-              )}
-
               <div className={`h-full border border-border bg-bg p-8 flex flex-col justify-center ${!unlocked ? 'blur-sm opacity-50 pointer-events-none select-none' : ''}`}>
                     <div>
                        <div className="text-center mb-10 pb-10 border-b border-border">
