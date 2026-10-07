@@ -2,10 +2,8 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { NavBar } from './components/NavBar';
 import { Modal } from './components/Modal';
 import { HomePage } from './HomePage';
-import { Grain } from './components/Grain';
 import { Cursor } from './components/Cursor';
 import { Loader } from './components/Loader';
-import { SideIndex } from './components/SideIndex';
 import { IMAGES } from './constants';
 import { initMotion } from './motion';
 
@@ -45,12 +43,10 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-bg text-text selection:bg-accent selection:text-white">
-      <Grain />
       <Cursor />
       {!ready && <Loader onDone={onLoaded} />}
       <div className={ready ? 'is-ready' : 'opacity-0 pointer-events-none'}>
       <div className="scroll-progress" style={{ transform: `scaleX(${progress})` }} />
-      <SideIndex />
 
       <NavBar onApply={openModal} />
       <HomePage onApply={openModal} />

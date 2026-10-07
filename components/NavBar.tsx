@@ -23,7 +23,7 @@ export const NavBar: React.FC<NavBarProps> = ({ onApply }) => {
         scrolled ? 'bg-bg/95 backdrop-blur-md border-border py-2' : 'bg-transparent border-transparent py-4'
       }`}
     >
-      <div className="container mx-auto px-4 md:px-8 max-w-[1200px] flex justify-between items-center">
+      <div className="px-4 md:px-8 lg:px-12 flex justify-between items-center">
         <a href="#intro" className="flex items-center group">
           <img
             src={IMAGES.logoWhite}
