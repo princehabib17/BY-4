@@ -1,5 +1,10 @@
 import { NavItem, Transformation, ProgramPillar } from './types';
 
+export const cld = (url: string, w = 1600) =>
+  url.includes('res.cloudinary.com')
+    ? url.replace('/upload/', `/upload/f_auto,q_auto,dpr_auto,w_${w},c_limit/`)
+    : url;
+
 // Using the uploaded images mapped to logical constants
 export const IMAGES = {
   hero: "https://res.cloudinary.com/dwoaeoio4/image/upload/v1768888771/Brother_Yusuf_triceps_qrmqph.jpg",
